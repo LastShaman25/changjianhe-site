@@ -1,0 +1,44 @@
+@theme {
+  --font-sans: "Aptos", "Segoe UI Variable", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "Cascadia Code", "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+
+  --color-bg: #08090b;
+  --color-bg-elevated: #0f1115;
+  --color-bg-deep: #050608;
+  --color-panel: rgba(255, 255, 255, 0.04);
+  --color-panel-soft: rgba(255, 255, 255, 0.025);
+  --color-panel-strong: rgba(255, 255, 255, 0.07);
+  --color-border: rgba(255, 255, 255, 0.1);
+  --color-border-strong: rgba(255, 255, 255, 0.16);
+  --color-glow: rgba(224, 232, 242, 0.18);
+
+  --color-text: #f5f7fa;
+  --color-text-soft: #c7ccd4;
+  --color-text-muted: #8b93a1;
+
+  --color-silver-1: #f3f6fb;
+  --color-silver-2: #d7dce5;
+  --color-silver-3: #aeb6c4;
+  --color-silver-4: #7b8493;
+
+  --color-accent: #c8d0dc;
+  --color-accent-soft: rgba(200, 208, 220, 0.18);
+
+  --shadow-soft: 0 8px 30px rgba(0, 0, 0, 0.22);
+  --shadow-panel: 0 20px 60px rgba(0, 0, 0, 0.28);
+  --shadow-float: 0 24px 80px rgba(0, 0, 0, 0.34);
+
+  --radius-xs: 0.5rem;
+  --radius-sm: 0.875rem;
+  --radius-md: 1.25rem;
+  --radius-lg: 1.75rem;
+  --radius-xl: 2.5rem;
+
+  --container-max: 80rem;
+  --container-wide: 92rem;
+  --reading-max: 46rem;
+  --reading-wide: 56rem;
+
+  --tracking-display: -0.04em;
+  --tracking-tightish: -0.02em;
+}

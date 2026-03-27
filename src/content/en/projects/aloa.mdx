@@ -1,0 +1,24 @@
+# Agnostic Membership Inference Attack on Two-Tower Neural Networks
+
+This project presents first-author research on membership inference attacks against two-tower recommendation architectures, with a focus on attack design, empirical evaluation, and security interpretation.
+
+## Research question
+
+Two-tower models are widely used in recommendation systems because they scale well and support efficient retrieval. At the same time, their structure introduces a natural security question: under what conditions can an attacker infer whether a user or example was present in the training data?
+
+This project studies that question through an agnostic attack setting, aiming to understand leakage behavior without assuming overly convenient access patterns.
+
+## Contribution
+
+The work includes:
+
+- defining the research direction and threat framing
+- designing the attack methodology
+- evaluating the behavior empirically
+- analyzing what the results imply for recommendation-model security
+
+## Why it matters
+
+Membership inference is not only an abstract privacy concern. In recommendation settings, it can expose whether particular user activity or records influenced model training, which makes it relevant to both privacy and model governance.
+
+By studying these attacks on practical architectures, the project helps bridge the gap between theoretical privacy risk and the systems that organizations actually deploy.

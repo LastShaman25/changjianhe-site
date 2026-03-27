@@ -1,0 +1,290 @@
+{
+  "Site": {
+    "brandName": "何昌健 Changjian \"CJ\" He",
+    "brandTitle": "AI 研究者、应用数学背景建设者与创业者",
+    "nav": {
+      "home": "首页",
+      "about": "关于",
+      "projects": "项目",
+      "research": "研究",
+      "accomplishments": "成果",
+      "contact": "联系"
+    },
+    "footer": {
+      "frame": "站点框架",
+      "navigation": "导航",
+      "signature": "站点定位",
+      "signatureText": "一个围绕研究、基础设施与可部署 AI 工作构建的高质感双语个人站。"
+    }
+  },
+  "HomePage": {
+    "heroEyebrow": "个人品牌展示",
+    "name": "何昌健 Changjian \"CJ\" He",
+    "title": "AI 研究者、应用数学背景建设者与创业者",
+    "intro": "以技术深度、数学严谨性与真实部署能力为核心，构建可信且可落地的智能系统。",
+    "ctaPrimary": "查看项目",
+    "ctaSecondary": "联系",
+    "identityEyebrow": "定位",
+    "identityTitle": "研究导向，建造驱动，部署优先。",
+    "identityText": "我的工作横跨 AI 研究、数学建模、安全基础设施与创业式产品执行。",
+    "featuredEyebrow": "重点项目",
+    "featuredTitle": "围绕基础设施、研究与智能系统的代表性工作。",
+    "featuredText": "这些项目集中体现了我如何理解可信边界、如何构建系统，以及如何让技术走向真实部署。",
+    "philosophyEyebrow": "方法论",
+    "philosophyTitle": "强大的系统，也应当是可信的系统。",
+    "philosophyText": "我的工作始终围绕一个核心问题：如何在提升智能系统能力的同时，不牺牲其可部署性、可解释性与可信性？",
+    "accomplishmentsEyebrow": "关键信号",
+    "accomplishmentsTitle": "研究、创业、基础设施与产品执行。",
+    "accomplishmentsText": "这是一条由技术深度、创业执行与应用型 AI 系统共同塑造的路径，而不是单一维度的履历。",
+    "accomplishmentsItems": {
+      "one": "围绕推荐系统与机器学习安全的一作研究工作。",
+      "two": "面向隐私敏感与高监管场景的原创 AI 基础设施思路。",
+      "three": "面向机构环境的智能学习助手试点型产品探索。"
+    },
+    "accomplishmentsCta": "查看成果",
+    "contactEyebrow": "联系",
+    "contactTitle": "欢迎交流研究、产品与基础设施相关机会。",
+    "contactText": "我愿意讨论应用型 AI、安全系统、技术战略以及高难度产品建设相关合作。",
+    "contactPrimary": "联系我",
+    "contactSecondary": "LinkedIn"
+  },
+  "Stories": {
+    "elementization": {
+      "hero": {
+        "eyebrow": "基础设施叙事",
+        "title": "Elementization 是一条面向高监管 AI 的可训练转化路径。",
+        "intro": "这一页将 Elementization 表达为一段系统旅程：原始数据从不稳定的数据世界进入，经过受控转化，形成可训练表示，跨越清晰的信任边界，最终成为可部署的 AI。",
+        "statementOne": "可训练转化",
+        "statementTwo": "高监管 AI",
+        "statementThree": "原始数据不再是运行时必需条件",
+        "ctaPrimary": "进入叙事",
+        "ctaSecondary": "阅读说明"
+      },
+      "dataWorld": {
+        "eyebrow": "数据世界",
+        "title": "原始状态充满价值，但也充满不稳定性与操作风险。",
+        "body": "故事从一个由异构信号、碎片与噪声构成的数据世界开始。信息价值是真实存在的，但这样的环境并不适合作为长期可部署系统的运行表面。"
+      },
+      "transformationGate": {
+        "eyebrow": "转化闸门",
+        "title": "当系统建立闸门、轨道与受控通道时，转化才真正开始。",
+        "body": "关键不只是在改变数据形态，而是在把它放入可治理的转化流程里。系统不再允许原始数据穿过每一个建模步骤，而是通过明确机制进行收束与转换。"
+      },
+      "transposedLayer": {
+        "eyebrow": "转置层",
+        "title": "随着结构逐步有序，可训练表示开始显现。",
+        "body": "在这一层里，表示不再只是依赖原始访问的副产品，而成为训练、迭代与下游智能能力真正运行的核心层。"
+      },
+      "trustBoundary": {
+        "eyebrow": "信任边界",
+        "title": "原始域被明确锁定在边界之外，而不是被默认信任。",
+        "body": "架构中的关键一环，是让信任边界本身变得可见。系统不应悄悄依赖无限制的原始数据接入，而应清晰标记信任终点与受控运行的起点。"
+      },
+      "deployableAi": {
+        "eyebrow": "可部署 AI",
+        "title": "最终留下的是一条更干净、更可治理的落地路径。",
+        "body": "当可训练性、治理与隔离被前置写入系统，AI 才更有可能在隐私、监管与机构信任要求都很高的环境中真正部署。"
+      },
+      "notes": {
+        "eyebrow": "项目说明",
+        "title": "长文背景",
+        "description": "下方 MDX 内容保留了 Elementization 的书面问题框架、设计动机与可公开边界。"
+      }
+    },
+    "aloa": {
+      "hero": {
+        "eyebrow": "研究叙事",
+        "title": "面向 two-tower 模型的成员推断，被组织为从架构到攻击再到评估的科学进程。",
+        "intro": "这一页将 ALOA 表达为一段科学化推进过程：先建立架构，再让潜在表示空间显形，随后通过探针扰动系统，令推断逻辑逐渐收敛，最后回到可量化的安全结果。",
+        "statementOne": "面向 two-tower 模型的成员推断",
+        "statementTwo": "一作研究",
+        "statementThree": "架构 + 攻击 + 评估",
+        "ctaPrimary": "进入分析",
+        "ctaSecondary": "阅读说明"
+      },
+      "twoTower": {
+        "eyebrow": "双塔架构",
+        "title": "用户侧与物品侧从分离开始，却在检索空间中相遇。",
+        "body": "故事从架构本身开始。two-tower 系统之所以强大，在于它将编码路径分离，却仍能高效完成匹配；而这种结构本身，也正构成了值得分析与攻击的表面。"
+      },
+      "embeddingField": {
+        "eyebrow": "嵌入场",
+        "title": "当架构被投射进潜在空间，它开始呈现为一种几何结构。",
+        "body": "一旦双塔输出表示，系统就可以被理解为由点、向量与聚类构成的场。在这里，可分性、相似性与隐藏结构开始对隐私风险产生意义。"
+      },
+      "perturbation": {
+        "eyebrow": "扰动阶段",
+        "title": "探针击中特征后，响应场开始改变。",
+        "body": "扰动阶段引入受控变化，用以观察模型如何响应。关键不只是表示是否发生移动，而是这种移动是否携带了关于训练成员关系的信号。"
+      },
+      "inference": {
+        "eyebrow": "推断阶段",
+        "title": "当置信度逐步收敛，它就从几何变化变成了成员决策信号。",
+        "body": "随着观测积累，攻击从抽象探测转向更稳定的推断结构。原本只是表示空间里的变化，开始被组织成真正可判定的成员推断逻辑。"
+      },
+      "charts": {
+        "eyebrow": "结果与发现",
+        "title": "叙事最终回到证据、指标与解释。",
+        "body": "最后一步是把攻击过程重新连接回评估本身。曲线、指标与公式式模块让风险变得可见，并把整个故事收束到论文级的技术结论上。",
+        "metricsLabel": "指标面板",
+        "formulasLabel": "公式模块",
+        "paperLabel": "论文背景"
+      },
+      "notes": {
+        "eyebrow": "研究说明",
+        "title": "长文背景",
+        "description": "下方 MDX 内容保留了 ALOA 项目的书面研究框架、贡献与安全意义。"
+      }
+    }
+  },
+  "Pages": {
+    "shared": {
+      "projectLabel": "项目"
+    },
+    "about": {
+      "eyebrow": "关于",
+      "title": "研究导向，建造驱动，部署优先。",
+      "description": "围绕 AI 研究、应用数学、安全型 AI 基础设施与创业执行的简要介绍。",
+      "metricsOneLabel": "核心领域",
+      "metricsOneValue": "4",
+      "metricsOneDetail": "研究、数学、基础设施与产品执行。",
+      "metricsTwoLabel": "主线方向",
+      "metricsTwoValue": "3",
+      "metricsTwoDetail": "基础设施、安全研究与可部署学习系统。",
+      "metricsThreeLabel": "工作方式",
+      "metricsThreeValue": "建造者 + 研究者",
+      "metricsThreeDetail": "以严谨、系统设计与实现推进为核心。",
+      "calloutEyebrow": "工作主张",
+      "calloutTitle": "去构建能在真实环境里成立的系统，而不只是演示效果。",
+      "calloutBody": "贯穿这些工作的，不是某一个单一职位标签，而是把数学基础、可信 AI 设计与能真正推进落地的产品执行连接起来。",
+      "focusEyebrow": "关注重心",
+      "focusTitle": "这个个人画像由技术深度与操作现实共同塑造。",
+      "focusText": "这些维度构成了我处理研究、系统设计与高难度产品工作的持续视角。",
+      "focusOneTitle": "研究框架",
+      "focusOneText": "工作通常从明确问题、清晰假设与可检验结构开始，而不是停留在宽泛的创新表述上。",
+      "focusTwoTitle": "基础设施思维",
+      "focusTwoText": "我关心什么样的条件，才能让智能系统在高信任环境里仍然可治理、可部署、可解释。",
+      "focusThreeTitle": "创业执行",
+      "focusThreeText": "我愿意把概念推进成可运作的产物，在不确定中工作，并把想法持续推向真实使用场景。",
+      "linksEyebrow": "下一步阅读",
+      "linksTitle": "继续进入项目叙事或研究方向页。",
+      "linkProjectsTitle": "项目叙事",
+      "linkProjectsDescription": "查看围绕基础设施、安全研究与应用型 AI 系统的旗舰项目。",
+      "linkResearchTitle": "研究方向",
+      "linkResearchDescription": "了解塑造本站研究部分的技术主题、方法与问题空间。"
+    },
+    "projects": {
+      "eyebrow": "项目",
+      "title": "基础设施、研究与智能系统方向的代表性工作。",
+      "description": "这是一个双语项目索引页，用于承接更深入的叙事、技术背景与后续电影感呈现。"
+    },
+    "research": {
+      "eyebrow": "研究",
+      "title": "机器学习安全、模型行为与具有数学基础的 AI。",
+      "description": "用于组织研究方向、论文级工作、方法论与技术性调查的总览页面。",
+      "metricsOneLabel": "主要视角",
+      "metricsOneValue": "机器学习安全",
+      "metricsOneDetail": "聚焦攻击面、评估方式与可信部署问题。",
+      "metricsTwoLabel": "方法",
+      "metricsTwoValue": "理论 + 实验",
+      "metricsTwoDetail": "研究框架同时依赖系统推理、技术测试与结果分析。",
+      "metricsThreeLabel": "范围",
+      "metricsThreeValue": "模型到基础设施",
+      "metricsThreeDetail": "把模型行为与其所处系统环境一并纳入讨论。",
+      "calloutEyebrow": "研究框架",
+      "calloutTitle": "当架构本身成为问题的一部分，安全议题才会真正变得有意思。",
+      "calloutBody": "这里的研究并不只关心孤立攻击，而是关心模型结构、表示几何、部署假设与系统边界如何共同影响安全与隐私风险。",
+      "methodsEyebrow": "方法路径",
+      "methodsTitle": "技术分析、实验评估与基础设施意识并行推进。",
+      "methodsBody": "目标是让研究既足够贴近现实部署，又足够精确，能够形成论文级贡献。",
+      "linksEyebrow": "代表线索",
+      "linksTitle": "当前的研究叙事主要由这些项目页面承接。",
+      "linkAloaTitle": "ALOA 研究叙事",
+      "linkAloaDescription": "把 two-tower 成员推断工作作为一段从架构到结论的科学叙事来阅读。",
+      "linkElementizationTitle": "Elementization 叙事",
+      "linkElementizationDescription": "查看基础设施思维与信任边界如何回到可部署 AI 的研究问题。"
+    },
+    "accomplishments": {
+      "eyebrow": "成果",
+      "title": "研究、基础设施、产品与创业经历。",
+      "description": "以结构化方式展示论文、项目、领导经历与技术执行成果。",
+      "metricsOneLabel": "路径",
+      "metricsOneValue": "研究 + 建造",
+      "metricsOneDetail": "把作者性研究与持续实现推进放在同一条线上。",
+      "metricsTwoLabel": "执行面",
+      "metricsTwoValue": "跨职能",
+      "metricsTwoDetail": "覆盖问题定义、系统思考、产品塑形与技术交付。",
+      "metricsThreeLabel": "偏好",
+      "metricsThreeValue": "务实深度",
+      "metricsThreeDetail": "偏向那些在真实约束下仍然保持技术严肃性的工作。",
+      "calloutEyebrow": "贯穿线",
+      "calloutTitle": "这里的成果更像是范围、严谨性与推动能力的证据。",
+      "calloutBody": "这页不是单纯罗列资历，而是展示研究投入、基础设施思考与把工作真正推进下去之间的连续性。",
+      "cardsEyebrow": "关键证据",
+      "cardsTitle": "最强的信号来自作者性、系统设计与执行能力的交叉处。",
+      "cardOneTitle": "研究作者性",
+      "cardOneText": "具备提出有意义安全问题并把它做成论文级研究的技术控制力。",
+      "cardTwoTitle": "系统架构",
+      "cardTwoText": "面向隐私敏感与高监管环境的原创 AI 基础设施框架。",
+      "cardThreeTitle": "产品推进",
+      "cardThreeText": "围绕真实可用、面向机构场景的智能系统进行试点型产品探索。",
+      "linksEyebrow": "相关页面",
+      "linksTitle": "如果结合项目页与联系页一起阅读，这里的成果会更完整。",
+      "linkProjectsTitle": "查看项目",
+      "linkProjectsDescription": "从宽泛成果信号进入更具体的项目叙事与技术框架。",
+      "linkContactTitle": "开始交流",
+      "linkContactDescription": "如果你想讨论合作、研究或产品建设，可以直接进入联系页。"
+    },
+    "contact": {
+      "eyebrow": "联系",
+      "title": "欢迎交流研究、产品与基础设施相关合作。",
+      "description": "用于专业合作、技术讨论与项目沟通的直接联系信息。",
+      "methodsEyebrow": "联系入口",
+      "methodsTitle": "用最合适的方式，开启对的问题讨论。",
+      "methodsText": "最有效的联系通常始于一个具体问题、一个合作背景，或一个确实需要技术深度的难题。",
+      "linkedin": "LinkedIn",
+      "linkedinValue": "linkedin.com/in/lastshaman",
+      "linkedinDescription": "适合职业联系、背景查看与直接建立连接。",
+      "projectsLabel": "项目上下文",
+      "projectsValue": "可先查看旗舰项目",
+      "projectsDescription": "如果你的信息涉及基础设施、研究或应用型 AI，先看项目页会更容易建立共同语境。",
+      "calloutEyebrow": "适配方向",
+      "calloutTitle": "最合适的对话通常发生在技术深度与现实雄心相交的位置。",
+      "calloutBody": "这包括应用型 AI 系统、模型安全、技术战略、基础设施设计，以及那些既需要严谨性也需要执行力的复杂问题。",
+      "linksEyebrow": "相关阅读",
+      "linksTitle": "如果你想在联系前先补充背景，可以从这里开始。",
+      "linkProjectsTitle": "项目索引",
+      "linkProjectsDescription": "快速了解基础设施、研究与产品方向上的旗舰工作。",
+      "linkResearchTitle": "研究总览",
+      "linkResearchDescription": "查看支撑这些项目与研究工作的技术方向与问题框架。",
+      "form": {
+        "eyebrow": "发送消息",
+        "title": "开始一次直接交流。",
+        "description": "可通过下方表单发送合作意向、技术讨论或创业 / 产品相关交流。",
+        "nameLabel": "姓名",
+        "namePlaceholder": "你的姓名",
+        "emailLabel": "邮箱",
+        "emailPlaceholder": "you@example.com",
+        "organizationLabel": "机构 / 团队",
+        "organizationPlaceholder": "公司、实验室或团队名称",
+        "subjectLabel": "主题",
+        "subjectPlaceholder": "你希望交流的主题是什么？",
+        "messageLabel": "消息内容",
+        "messagePlaceholder": "请简要说明背景、问题或合作想法。",
+        "websiteLabel": "网站",
+        "privacyNote": "你的信息仅用于直接回复与后续合作沟通。",
+        "submit": "发送消息",
+        "submitting": "发送中...",
+        "success": "消息发送成功。我会尽快回复你。",
+        "errors": {
+          "invalid_request": "表单发送时出现问题，请稍后重试。",
+          "missing_fields": "请先填写必填字段。",
+          "invalid_email": "请输入有效的邮箱地址。",
+          "message_too_short": "请补充更多上下文，方便我更有效地回复。",
+          "service_unavailable": "联系服务暂未配置完成，当前可先通过 LinkedIn 联系。",
+          "send_failed": "消息暂时无法送达，请稍后再试。"
+        }
+      }
+    }
+  }
+}
