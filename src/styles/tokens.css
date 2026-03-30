@@ -1,44 +1,54 @@
 @theme {
-  --font-sans: "Aptos", "Segoe UI Variable", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-  --font-mono: "Cascadia Code", "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  --font-sans: var(--font-space-grotesk), "Segoe UI Variable", "Segoe UI", "Helvetica Neue",
+    Arial, sans-serif;
+  --font-mono: var(--font-space-grotesk), "Segoe UI Variable", "Helvetica Neue", Arial, sans-serif;
 
-  --color-bg: #08090b;
-  --color-bg-elevated: #0f1115;
-  --color-bg-deep: #050608;
-  --color-panel: rgba(255, 255, 255, 0.04);
-  --color-panel-soft: rgba(255, 255, 255, 0.025);
-  --color-panel-strong: rgba(255, 255, 255, 0.07);
-  --color-border: rgba(255, 255, 255, 0.1);
-  --color-border-strong: rgba(255, 255, 255, 0.16);
-  --color-glow: rgba(224, 232, 242, 0.18);
+  --color-bg: #131313;
+  --color-bg-elevated: #181817;
+  --color-bg-deep: #0d0d0d;
+  --color-surface-lowest: #0e0e0e;
+  --color-surface-low: #171716;
+  --color-surface: #20201f;
+  --color-surface-high: #2a2a29;
+  --color-surface-highest: #353534;
+  --color-panel: rgba(32, 32, 31, 0.92);
+  --color-panel-soft: rgba(23, 23, 22, 0.94);
+  --color-panel-strong: rgba(53, 53, 52, 0.96);
+  --color-border: rgba(94, 63, 60, 0.15);
+  --color-border-strong: rgba(94, 63, 60, 0.28);
+  --color-glow: rgba(255, 84, 76, 0.18);
 
-  --color-text: #f5f7fa;
-  --color-text-soft: #c7ccd4;
-  --color-text-muted: #8b93a1;
+  --color-text: #fff4f3;
+  --color-text-soft: #d8c3c1;
+  --color-text-muted: #9f8785;
 
-  --color-silver-1: #f3f6fb;
-  --color-silver-2: #d7dce5;
-  --color-silver-3: #aeb6c4;
-  --color-silver-4: #7b8493;
+  --color-silver-1: #fff4f3;
+  --color-silver-2: #ffb4ac;
+  --color-silver-3: #d48782;
+  --color-silver-4: #8d6562;
 
-  --color-accent: #c8d0dc;
-  --color-accent-soft: rgba(200, 208, 220, 0.18);
+  --color-accent: #ff544c;
+  --color-accent-soft: rgba(255, 84, 76, 0.16);
+  --color-accent-dim: #ffb4ac;
+  --color-warning: #eaea00;
+  --color-warning-soft: rgba(234, 234, 0, 0.16);
+  --color-outline-ghost: rgba(94, 63, 60, 0.15);
 
-  --shadow-soft: 0 8px 30px rgba(0, 0, 0, 0.22);
-  --shadow-panel: 0 20px 60px rgba(0, 0, 0, 0.28);
-  --shadow-float: 0 24px 80px rgba(0, 0, 0, 0.34);
+  --shadow-soft: 0 18px 48px rgba(255, 84, 76, 0.08);
+  --shadow-panel: 0 24px 60px rgba(255, 84, 76, 0.1);
+  --shadow-float: 0 40px 80px rgba(255, 84, 76, 0.06);
 
-  --radius-xs: 0.5rem;
-  --radius-sm: 0.875rem;
-  --radius-md: 1.25rem;
-  --radius-lg: 1.75rem;
-  --radius-xl: 2.5rem;
+  --radius-xs: 0;
+  --radius-sm: 0;
+  --radius-md: 0;
+  --radius-lg: 0;
+  --radius-xl: 0;
 
   --container-max: 80rem;
   --container-wide: 92rem;
   --reading-max: 46rem;
   --reading-wide: 56rem;
 
-  --tracking-display: -0.04em;
+  --tracking-display: -0.02em;
   --tracking-tightish: -0.02em;
 }

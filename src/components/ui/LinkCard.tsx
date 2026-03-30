@@ -31,8 +31,8 @@ export default function LinkCard({
         {title}
       </h3>
       <p className="body-md mt-3">{description}</p>
-      <div className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-[var(--color-silver-2)] transition group-hover:translate-x-0.5 group-hover:text-white">
-        <span aria-hidden="true">-&gt;</span>
+      <div className="mt-6 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.08em] text-[var(--color-warning)] transition group-hover:translate-x-0.5 group-hover:text-[var(--color-text)]">
+        <span aria-hidden="true">Signal +</span>
       </div>
     </>
   );

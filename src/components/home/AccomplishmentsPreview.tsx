@@ -41,7 +41,7 @@ export default function AccomplishmentsPreview({
           <StaggerGroup className="grid gap-4" delay={0.06} stagger={0.08}>
             {items.map((item) => (
               <MotionCard key={item}>
-                <div className="rounded-[1.15rem] border border-[var(--color-border)] bg-white/4 px-5 py-4">
+                <div className="bg-[linear-gradient(to_right,var(--color-warning)_0,var(--color-warning)_3px,transparent_3px)] px-5 py-4 [background-color:var(--color-surface-lowest)]">
                   <p className="body-md text-[var(--color-text)]">{item}</p>
                 </div>
               </MotionCard>

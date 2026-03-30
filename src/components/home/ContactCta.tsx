@@ -24,7 +24,7 @@ export default function ContactCta({
       <Container>
         <Reveal>
           <div className="metal-panel relative overflow-hidden p-8 sm:p-10 lg:p-12">
-            <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent" />
+            <div className="absolute inset-y-0 right-0 w-24 bg-[linear-gradient(to_left,rgba(255,84,76,0.08),transparent)]" />
             <p className="section-label">{eyebrow}</p>
 
             <div className="mt-6 grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">

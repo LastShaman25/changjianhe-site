@@ -26,8 +26,8 @@ body {
 }
 
 *::selection {
-  background: rgba(196, 202, 211, 0.18);
-  color: #ffffff;
+  background: rgba(255, 84, 76, 0.32);
+  color: #fff9d4;
 }
 
 a {

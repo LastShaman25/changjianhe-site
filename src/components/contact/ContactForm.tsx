@@ -75,8 +75,10 @@ export default function ContactForm() {
 
       <form className="mt-8 grid gap-5" onSubmit={handleSubmit}>
         <div className="grid gap-5 md:grid-cols-2">
-          <label className="grid gap-2">
-            <span className="text-sm font-medium text-[var(--color-text)]">{t("nameLabel")}</span>
+          <label className="group grid gap-2">
+            <span className="translate-x-0 text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-[var(--color-text-muted)] transition group-focus-within:translate-x-1 group-focus-within:text-[var(--color-warning)]">
+              {t("nameLabel")}
+            </span>
             <input
               type="text"
               name="name"
@@ -84,13 +86,15 @@ export default function ContactForm() {
               value={form.name}
               onChange={(event) => updateField("name", event.target.value)}
               placeholder={t("namePlaceholder")}
-              className="rounded-2xl border border-[var(--color-border)] bg-white/5 px-4 py-3 text-[var(--color-text)] outline-none transition focus:border-[var(--color-border-strong)] focus:bg-white/7"
+              className="border-b-2 border-[var(--color-border)] bg-transparent px-0 py-3 text-[var(--color-text)] outline-none transition focus:border-[var(--color-warning)]"
               required
             />
           </label>
 
-          <label className="grid gap-2">
-            <span className="text-sm font-medium text-[var(--color-text)]">{t("emailLabel")}</span>
+          <label className="group grid gap-2">
+            <span className="translate-x-0 text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-[var(--color-text-muted)] transition group-focus-within:translate-x-1 group-focus-within:text-[var(--color-warning)]">
+              {t("emailLabel")}
+            </span>
             <input
               type="email"
               name="email"
@@ -98,15 +102,15 @@ export default function ContactForm() {
               value={form.email}
               onChange={(event) => updateField("email", event.target.value)}
               placeholder={t("emailPlaceholder")}
-              className="rounded-2xl border border-[var(--color-border)] bg-white/5 px-4 py-3 text-[var(--color-text)] outline-none transition focus:border-[var(--color-border-strong)] focus:bg-white/7"
+              className="border-b-2 border-[var(--color-border)] bg-transparent px-0 py-3 text-[var(--color-text)] outline-none transition focus:border-[var(--color-warning)]"
               required
             />
           </label>
         </div>
 
         <div className="grid gap-5 md:grid-cols-2">
-          <label className="grid gap-2">
-            <span className="text-sm font-medium text-[var(--color-text)]">
+          <label className="group grid gap-2">
+            <span className="translate-x-0 text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-[var(--color-text-muted)] transition group-focus-within:translate-x-1 group-focus-within:text-[var(--color-warning)]">
               {t("organizationLabel")}
             </span>
             <input
@@ -116,12 +120,12 @@ export default function ContactForm() {
               value={form.organization}
               onChange={(event) => updateField("organization", event.target.value)}
               placeholder={t("organizationPlaceholder")}
-              className="rounded-2xl border border-[var(--color-border)] bg-white/5 px-4 py-3 text-[var(--color-text)] outline-none transition focus:border-[var(--color-border-strong)] focus:bg-white/7"
+              className="border-b-2 border-[var(--color-border)] bg-transparent px-0 py-3 text-[var(--color-text)] outline-none transition focus:border-[var(--color-warning)]"
             />
           </label>
 
-          <label className="grid gap-2">
-            <span className="text-sm font-medium text-[var(--color-text)]">
+          <label className="group grid gap-2">
+            <span className="translate-x-0 text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-[var(--color-text-muted)] transition group-focus-within:translate-x-1 group-focus-within:text-[var(--color-warning)]">
               {t("subjectLabel")}
             </span>
             <input
@@ -130,7 +134,7 @@ export default function ContactForm() {
               value={form.subject}
               onChange={(event) => updateField("subject", event.target.value)}
               placeholder={t("subjectPlaceholder")}
-              className="rounded-2xl border border-[var(--color-border)] bg-white/5 px-4 py-3 text-[var(--color-text)] outline-none transition focus:border-[var(--color-border-strong)] focus:bg-white/7"
+              className="border-b-2 border-[var(--color-border)] bg-transparent px-0 py-3 text-[var(--color-text)] outline-none transition focus:border-[var(--color-warning)]"
             />
           </label>
         </div>
@@ -147,15 +151,17 @@ export default function ContactForm() {
           />
         </label>
 
-        <label className="grid gap-2">
-          <span className="text-sm font-medium text-[var(--color-text)]">{t("messageLabel")}</span>
+        <label className="group grid gap-2">
+          <span className="translate-x-0 text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-[var(--color-text-muted)] transition group-focus-within:translate-x-1 group-focus-within:text-[var(--color-warning)]">
+            {t("messageLabel")}
+          </span>
           <textarea
             name="message"
             rows={7}
             value={form.message}
             onChange={(event) => updateField("message", event.target.value)}
             placeholder={t("messagePlaceholder")}
-            className="rounded-[1.6rem] border border-[var(--color-border)] bg-white/5 px-4 py-3 text-[var(--color-text)] outline-none transition focus:border-[var(--color-border-strong)] focus:bg-white/7"
+            className="border-b-2 border-[var(--color-border)] bg-transparent px-0 py-3 text-[var(--color-text)] outline-none transition focus:border-[var(--color-warning)]"
             required
           />
         </label>
@@ -168,13 +174,13 @@ export default function ContactForm() {
         </div>
 
         {status === "success" ? (
-          <div className="rounded-2xl border border-emerald-400/30 bg-emerald-400/10 px-4 py-3 text-sm text-emerald-100">
+          <div className="border-l-4 border-[var(--color-warning)] bg-[rgba(234,234,0,0.08)] px-4 py-3 text-sm text-[#fff9d4]">
             {t("success")}
           </div>
         ) : null}
 
         {status === "error" ? (
-          <div className="rounded-2xl border border-red-400/30 bg-red-400/10 px-4 py-3 text-sm text-red-100">
+          <div className="border-l-4 border-[var(--color-accent)] bg-[rgba(255,84,76,0.12)] px-4 py-3 text-sm text-[var(--color-text)]">
             {t(`errors.${errorCode ?? "invalid_request"}`)}
           </div>
         ) : null}

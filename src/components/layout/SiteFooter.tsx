@@ -10,7 +10,7 @@ export default function SiteFooter() {
   const footerT = useTranslations("Site.footer");
 
   return (
-    <footer className="border-t border-white/10 bg-[linear-gradient(to_top,rgba(255,255,255,0.03),transparent)]">
+    <footer className="bg-[linear-gradient(to_top,rgba(255,84,76,0.06),transparent)]">
       <Section className="py-10 sm:py-12">
         <Container>
           <div className="metal-panel px-6 py-8 sm:px-8 sm:py-10">
@@ -29,7 +29,7 @@ export default function SiteFooter() {
                       <LocaleLink
                         key={item.href}
                         href={item.href}
-                        className="rounded-full border border-white/8 px-3 py-2 transition hover:border-white/16 hover:bg-white/5 hover:text-[var(--color-text-soft)]"
+                        className="border border-[var(--color-border)] px-3 py-2 uppercase tracking-[0.08em] transition hover:border-[rgba(234,234,0,0.42)] hover:bg-[rgba(234,234,0,0.08)] hover:text-[var(--color-text-soft)]"
                       >
                         {navT(item.labelKey)}
                       </LocaleLink>
