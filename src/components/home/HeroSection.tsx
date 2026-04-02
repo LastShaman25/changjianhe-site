@@ -9,7 +9,7 @@ import { motion } from "framer-motion";
 import useHydratedReducedMotion from "@/components/motion/useHydratedReducedMotion";
 import MotionButtonWrap from "@/components/motion/MotionButtonWrap";
 import headshotImage from "@/pic/headshot.jpg";
-import logoImage from "@/pic/logo.png";
+import logoImage from "@/pic/logo_black.png";
 
 type HeroSectionProps = {
   eyebrow: string;
@@ -333,8 +333,8 @@ export default function HeroSection({
                   <Image
                     src={logoImage}
                     alt="CJ logo"
-                    className="h-8 w-8 object-contain opacity-80"
-                    sizes="32px"
+                    className="h-16 w-auto object-contain opacity-90"
+                    sizes="64px"
                   />
                 </div>
                 <div className="speed-bar mt-3" aria-hidden="true">
