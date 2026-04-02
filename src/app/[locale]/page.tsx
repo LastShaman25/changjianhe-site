@@ -6,6 +6,7 @@ import HeroSection from "@/components/home/HeroSection";
 import IdentityStrip from "@/components/home/IdentityStrip";
 import FeaturedProjects from "@/components/home/FeaturedProjects";
 import PhilosophySection from "@/components/home/PhilosophySection";
+import ResearchTicker from "@/components/home/ResearchTicker";
 import AccomplishmentsPreview from "@/components/home/AccomplishmentsPreview";
 import ContactCta from "@/components/home/ContactCta";
 import { featuredProjects } from "@/data/projects";
@@ -62,6 +63,8 @@ export default async function HomePage({ params }: HomePageProps) {
           title={t("philosophyTitle")}
           text={t("philosophyText")}
         />
+
+        <ResearchTicker locale={locale} />
 
         <AccomplishmentsPreview
           eyebrow={t("accomplishmentsEyebrow")}

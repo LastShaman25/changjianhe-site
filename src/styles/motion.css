@@ -5,3 +5,45 @@
   --dur-base: 260ms;
   --dur-slow: 420ms;
 }
+
+@keyframes research-ticker-scroll {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.research-ticker {
+  color: var(--color-text-muted);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.research-ticker__track {
+  display: flex;
+  width: max-content;
+  min-width: 100%;
+  animation: research-ticker-scroll 28s linear infinite;
+  will-change: transform;
+}
+
+.research-ticker__track span {
+  display: inline-flex;
+  flex: 0 0 auto;
+  padding-right: 2rem;
+  white-space: nowrap;
+}
+
+.research-ticker:hover .research-ticker__track {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .research-ticker__track {
+    animation: none;
+    transform: translateX(0);
+  }
+}

@@ -1,10 +1,9 @@
 import Container from "@/components/layout/Container";
 import Section from "@/components/layout/Section";
-import LocaleLink from "@/components/ui/LocaleLink";
+import HeadlineReveal from "@/components/motion/HeadlineReveal";
+import ScrollFadeIn from "@/components/motion/ScrollFadeIn";
+import ProjectCards from "@/components/projects/ProjectCards";
 import type { Locale, ProjectEntry } from "@/data/projects";
-import Reveal from "@/components/motion/Reveal";
-import StaggerGroup from "@/components/motion/StaggerGroup";
-import MotionCard from "@/components/motion/MotionCard";
 
 type FeaturedProjectsProps = {
   eyebrow: string;
@@ -24,27 +23,49 @@ export default function FeaturedProjects({
   return (
     <Section>
       <Container>
-        <Reveal>
-          <div className="max-w-3xl">
+        <div className="max-w-3xl">
+          <ScrollFadeIn>
             <p className="section-label">{eyebrow}</p>
-            <h3 className="headline-xl mt-6">{title}</h3>
+          </ScrollFadeIn>
+          <HeadlineReveal
+            className="headline-xl mt-6"
+            lines={
+              title === "Flagship projects across infrastructure, research, and intelligent systems."
+                ? [
+                    <span key="flagship">
+                      {/* ACCENT: confirm this word */}
+                      <em className="text-[var(--color-accent)] not-italic">Flagship</em>
+                      {" projects across infrastructure,"}
+                    </span>,
+                    "research, and intelligent systems."
+                  ]
+                : [
+                    <span key="infrastructure-zh">
+                      "围绕"
+                      {/* ACCENT: confirm this word */}
+                      <em className="text-[var(--color-accent)] not-italic">基础设施</em>
+                      "、研究与"
+                    </span>,
+                    "智能系统的代表性工作。"
+                  ]
+            }
+          />
+          <ScrollFadeIn delay={0.44}>
             <p className="body-lg mt-6">{text}</p>
-          </div>
-        </Reveal>
+          </ScrollFadeIn>
+        </div>
 
-        <StaggerGroup className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3" stagger={0.11}>
-          {projects.map((project) => (
-            <MotionCard key={project.slug}>
-              <LocaleLink href={project.href} className="metal-card group block h-full p-6">
-                <p className="section-label">{project.category[locale]}</p>
-                <h4 className="headline-lg mt-5 text-[1.7rem] transition group-hover:translate-x-[2px]">
-                  {project.title[locale]}
-                </h4>
-                <p className="body-md mt-4">{project.summary[locale]}</p>
-              </LocaleLink>
-            </MotionCard>
-          ))}
-        </StaggerGroup>
+        <div className="mt-10">
+          <ProjectCards
+            items={projects.map((project) => ({
+              key: project.slug,
+              href: project.href,
+              eyebrow: project.category[locale],
+              title: project.title[locale],
+              summary: project.summary[locale]
+            }))}
+          />
+        </div>
       </Container>
     </Section>
   );

@@ -3,14 +3,15 @@ import type { Metadata } from "next";
 import type { Locale } from "@/data/projects";
 import SiteShell from "@/components/layout/SiteShell";
 import PageIntro from "@/components/layout/PageIntro";
+import AboutBioSection from "@/components/about/AboutBioSection";
+import AboutFocusAreas from "@/components/about/AboutFocusAreas";
+import AboutNextSurfaceCards from "@/components/about/AboutNextSurfaceCards";
 import Section from "@/components/layout/Section";
 import ContentBody from "@/components/layout/ContentBody";
-import MdxContent from "@/components/content/MdxContent";
 import SectionHeading from "@/components/ui/SectionHeading";
 import MetricStrip from "@/components/ui/MetricStrip";
 import CalloutCard from "@/components/ui/CalloutCard";
 import LinkCard from "@/components/ui/LinkCard";
-import { loadMdx } from "@/lib/mdx/loadMdx";
 import { buildPageMetadata } from "@/lib/seo";
 
 type AboutPageProps = {
@@ -32,7 +33,6 @@ export async function generateMetadata({ params }: AboutPageProps): Promise<Meta
 export default async function AboutPage({ params }: AboutPageProps) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "Pages.about" });
-  const { Component } = await loadMdx({ locale, section: "site", slug: "about" });
 
   return (
     <SiteShell>
@@ -80,17 +80,22 @@ export default async function AboutPage({ params }: AboutPageProps) {
                   title={t("focusTitle")}
                   text={t("focusText")}
                 />
-                <div className="grid gap-4 sm:grid-cols-3">
-                  <CalloutCard title={t("focusOneTitle")}>
-                    <p className="body-md">{t("focusOneText")}</p>
-                  </CalloutCard>
-                  <CalloutCard title={t("focusTwoTitle")}>
-                    <p className="body-md">{t("focusTwoText")}</p>
-                  </CalloutCard>
-                  <CalloutCard title={t("focusThreeTitle")}>
-                    <p className="body-md">{t("focusThreeText")}</p>
-                  </CalloutCard>
-                </div>
+                <AboutFocusAreas
+                  items={[
+                    {
+                      title: t("focusOneTitle"),
+                      text: t("focusOneText")
+                    },
+                    {
+                      title: t("focusTwoTitle"),
+                      text: t("focusTwoText")
+                    },
+                    {
+                      title: t("focusThreeTitle"),
+                      text: t("focusThreeText")
+                    }
+                  ]}
+                />
               </div>
             </div>
           </div>
@@ -98,25 +103,27 @@ export default async function AboutPage({ params }: AboutPageProps) {
 
         <Section>
           <ContentBody>
-            <MdxContent component={Component} />
+            <AboutBioSection locale={locale} />
           </ContentBody>
         </Section>
 
         <Section>
           <div className="site-container">
             <SectionHeading eyebrow={t("linksEyebrow")} title={t("linksTitle")} />
-            <div className="mt-8 grid gap-4 md:grid-cols-2">
-              <LinkCard
-                href="/projects"
-                title={t("linkProjectsTitle")}
-                description={t("linkProjectsDescription")}
-              />
-              <LinkCard
-                href="/research"
-                title={t("linkResearchTitle")}
-                description={t("linkResearchDescription")}
-              />
-            </div>
+            <AboutNextSurfaceCards
+              items={[
+                {
+                  href: "/projects",
+                  title: t("linkProjectsTitle"),
+                  description: t("linkProjectsDescription")
+                },
+                {
+                  href: "/research",
+                  title: t("linkResearchTitle"),
+                  description: t("linkResearchDescription")
+                }
+              ]}
+            />
           </div>
         </Section>
       </main>

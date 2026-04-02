@@ -1,6 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Space_Grotesk } from "next/font/google";
+import MotionProvider from "@/components/providers/MotionProvider";
 import { buildRootMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = buildRootMetadata();
@@ -17,7 +18,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning className={spaceGrotesk.variable}>
-      <body>{children}</body>
+      <body>
+        <MotionProvider>{children}</MotionProvider>
+      </body>
     </html>
   );
 }

@@ -5,7 +5,7 @@ import SiteShell from "@/components/layout/SiteShell";
 import PageIntro from "@/components/layout/PageIntro";
 import Container from "@/components/layout/Container";
 import Section from "@/components/layout/Section";
-import LocaleLink from "@/components/ui/LocaleLink";
+import ProjectCards from "@/components/projects/ProjectCards";
 import { projects } from "@/data/projects";
 import { buildPageMetadata } from "@/lib/seo";
 
@@ -41,19 +41,16 @@ export default async function ProjectsPage({ params }: ProjectsPageProps) {
 
         <Section>
           <Container>
-            <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-              {projects.map((project) => (
-                <LocaleLink
-                  key={project.slug}
-                  href={project.href}
-                  className="metal-card block p-6"
-                >
-                  <p className="section-label">{shared("projectLabel")}</p>
-                  <h2 className="headline-lg mt-5 text-[1.8rem]">{project.title[locale]}</h2>
-                  <p className="body-md mt-4">{project.summary[locale]}</p>
-                </LocaleLink>
-              ))}
-            </div>
+            <ProjectCards
+              items={projects.map((project) => ({
+                key: project.slug,
+                href: project.href,
+                eyebrow: shared("projectLabel"),
+                title: project.title[locale],
+                summary: project.summary[locale]
+              }))}
+              titleClassName="headline-lg mt-5 text-[1.8rem]"
+            />
           </Container>
         </Section>
       </main>

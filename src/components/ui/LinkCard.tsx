@@ -9,6 +9,7 @@ type LinkCardProps = {
   external?: boolean;
   meta?: ReactNode;
   className?: string;
+  disableHoverLift?: boolean;
 };
 
 export default function LinkCard({
@@ -17,10 +18,12 @@ export default function LinkCard({
   href,
   external = false,
   meta,
-  className
+  className,
+  disableHoverLift = false
 }: LinkCardProps) {
   const cardClassName = cn(
-    "metal-card group block p-6 sm:p-7 transition hover:-translate-y-[2px]",
+    "metal-card group block p-6 sm:p-7 transition",
+    !disableHoverLift && "hover:-translate-y-[2px]",
     className
   );
 

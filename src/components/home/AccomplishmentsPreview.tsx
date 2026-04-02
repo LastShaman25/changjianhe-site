@@ -1,7 +1,8 @@
 import Container from "@/components/layout/Container";
 import Section from "@/components/layout/Section";
 import LocaleLink from "@/components/ui/LocaleLink";
-import Reveal from "@/components/motion/Reveal";
+import HeadlineReveal from "@/components/motion/HeadlineReveal";
+import ScrollFadeIn from "@/components/motion/ScrollFadeIn";
 import StaggerGroup from "@/components/motion/StaggerGroup";
 import MotionButtonWrap from "@/components/motion/MotionButtonWrap";
 import MotionCard from "@/components/motion/MotionCard";
@@ -25,18 +26,43 @@ export default function AccomplishmentsPreview({
     <Section>
       <Container>
         <div className="grid gap-6 lg:grid-cols-[1fr_1fr]">
-          <Reveal>
-            <div className="metal-panel p-8 sm:p-10">
+          <div className="metal-panel p-8 sm:p-10">
+            <ScrollFadeIn>
               <p className="section-label">{eyebrow}</p>
-              <h3 className="headline-lg mt-6 max-w-2xl">{title}</h3>
+            </ScrollFadeIn>
+            <HeadlineReveal
+              className="headline-lg mt-6 max-w-2xl"
+              lines={
+                title === "Research, ventures, infrastructure, and product execution."
+                  ? [
+                      <span key="research">
+                        {/* ACCENT: confirm this word */}
+                        <em className="text-[var(--color-accent)] not-italic">Research</em>
+                        {", ventures,"}
+                      </span>,
+                      "infrastructure, and product execution."
+                    ]
+                  : [
+                      <span key="research-zh">
+                        {/* ACCENT: confirm this word */}
+                        <em className="text-[var(--color-accent)] not-italic">研究</em>
+                        "、创业、"
+                      </span>,
+                      "基础设施与产品执行。"
+                    ]
+              }
+            />
+            <ScrollFadeIn delay={0.44}>
               <p className="body-md mt-6 max-w-2xl">{text}</p>
+            </ScrollFadeIn>
+            <ScrollFadeIn delay={0.52}>
               <MotionButtonWrap className="mt-8 inline-flex">
                 <LocaleLink href="/accomplishments" className="btn-secondary">
                   {cta}
                 </LocaleLink>
               </MotionButtonWrap>
-            </div>
-          </Reveal>
+            </ScrollFadeIn>
+          </div>
 
           <StaggerGroup className="grid gap-4" delay={0.06} stagger={0.08}>
             {items.map((item) => (
