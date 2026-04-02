@@ -22,6 +22,17 @@ export default function AccomplishmentsPreview({
   items,
   cta
 }: AccomplishmentsPreviewProps) {
+  const titleLines =
+    title === "Research, ventures, infrastructure, and product execution."
+      ? [
+          <span key="research">
+            <em className="text-[var(--color-accent)] not-italic">Research</em>
+            {", ventures,"}
+          </span>,
+          "infrastructure, and product execution."
+        ]
+      : [title];
+
   return (
     <Section>
       <Container>
@@ -30,28 +41,7 @@ export default function AccomplishmentsPreview({
             <ScrollFadeIn>
               <p className="section-label">{eyebrow}</p>
             </ScrollFadeIn>
-            <HeadlineReveal
-              className="headline-lg mt-6 max-w-2xl"
-              lines={
-                title === "Research, ventures, infrastructure, and product execution."
-                  ? [
-                      <span key="research">
-                        {/* ACCENT: confirm this word */}
-                        <em className="text-[var(--color-accent)] not-italic">Research</em>
-                        {", ventures,"}
-                      </span>,
-                      "infrastructure, and product execution."
-                    ]
-                  : [
-                      <span key="research-zh">
-                        {/* ACCENT: confirm this word */}
-                        <em className="text-[var(--color-accent)] not-italic">研究</em>
-                        "、创业、"
-                      </span>,
-                      "基础设施与产品执行。"
-                    ]
-              }
-            />
+            <HeadlineReveal className="headline-lg mt-6 max-w-2xl" lines={titleLines} />
             <ScrollFadeIn delay={0.44}>
               <p className="body-md mt-6 max-w-2xl">{text}</p>
             </ScrollFadeIn>

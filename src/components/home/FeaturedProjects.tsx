@@ -20,6 +20,17 @@ export default function FeaturedProjects({
   locale,
   projects
 }: FeaturedProjectsProps) {
+  const titleLines =
+    title === "Flagship projects across infrastructure, research, and intelligent systems."
+      ? [
+          <span key="flagship">
+            <em className="text-[var(--color-accent)] not-italic">Flagship</em>
+            {" projects across infrastructure,"}
+          </span>,
+          "research, and intelligent systems."
+        ]
+      : [title];
+
   return (
     <Section>
       <Container>
@@ -27,29 +38,7 @@ export default function FeaturedProjects({
           <ScrollFadeIn>
             <p className="section-label">{eyebrow}</p>
           </ScrollFadeIn>
-          <HeadlineReveal
-            className="headline-xl mt-6"
-            lines={
-              title === "Flagship projects across infrastructure, research, and intelligent systems."
-                ? [
-                    <span key="flagship">
-                      {/* ACCENT: confirm this word */}
-                      <em className="text-[var(--color-accent)] not-italic">Flagship</em>
-                      {" projects across infrastructure,"}
-                    </span>,
-                    "research, and intelligent systems."
-                  ]
-                : [
-                    <span key="infrastructure-zh">
-                      "围绕"
-                      {/* ACCENT: confirm this word */}
-                      <em className="text-[var(--color-accent)] not-italic">基础设施</em>
-                      "、研究与"
-                    </span>,
-                    "智能系统的代表性工作。"
-                  ]
-            }
-          />
+          <HeadlineReveal className="headline-xl mt-6" lines={titleLines} />
           <ScrollFadeIn delay={0.44}>
             <p className="body-lg mt-6">{text}</p>
           </ScrollFadeIn>

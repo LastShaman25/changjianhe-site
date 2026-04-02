@@ -272,4 +272,125 @@
       rgba(32, 32, 31, 0.94);
     box-shadow: var(--shadow-float);
   }
+
+  .hero-portrait-shell {
+    position: relative;
+  }
+
+  .hero-portrait-frame {
+    position: relative;
+    overflow: hidden;
+    min-height: 30rem;
+    background:
+      linear-gradient(to bottom, var(--color-accent) 0, var(--color-accent) 4px, transparent 4px),
+      linear-gradient(to bottom right, rgba(255, 84, 76, 0.06), rgba(255, 84, 76, 0.01) 60%),
+      var(--color-surface);
+  }
+
+  .hero-portrait-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255, 84, 76, 0.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 84, 76, 0.08) 1px, transparent 1px);
+    background-size: 44px 44px;
+    mask-image: linear-gradient(to bottom, black 35%, transparent 100%);
+    opacity: 0.45;
+    pointer-events: none;
+  }
+
+  .hero-portrait-image-wrap {
+    position: relative;
+    aspect-ratio: 1 / 1.08;
+    margin: clamp(1rem, 2vw, 1.5rem);
+    overflow: hidden;
+    background: var(--color-surface-highest);
+  }
+
+  .hero-portrait-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  .hero-metric-panel {
+    display: grid;
+    gap: 0.5rem;
+    padding: 1rem 1.1rem;
+    background:
+      linear-gradient(to right, var(--color-warning) 0, var(--color-warning) 3px, transparent 3px),
+      var(--color-surface-low);
+  }
+
+  .hero-side-panel {
+    padding: 1rem 1.1rem;
+    background:
+      linear-gradient(to right, var(--color-accent) 0, var(--color-accent) 3px, transparent 3px),
+      var(--color-surface-low);
+  }
+
+  .hero-metric-label {
+    font-family: var(--font-mono), monospace;
+    font-size: 0.6875rem;
+    letter-spacing: 0.16em;
+    line-height: 1;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
+
+  .hero-metric-value {
+    font-size: 1rem;
+    line-height: 1.2;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-text);
+  }
+
+  .hero-side-copy {
+    font-size: 0.8125rem;
+    line-height: 1.65;
+    color: var(--color-text-soft);
+  }
+
+  .pulse-indicator {
+    display: inline-block;
+    width: 0.5rem;
+    height: 0.5rem;
+    background: var(--color-warning);
+    box-shadow: 0 0 14px rgba(234, 234, 0, 0.38);
+    animation: pulse-indicator 1s ease-in-out infinite;
+  }
+
+  .speed-bar {
+    position: relative;
+    height: 0.7rem;
+    background:
+      repeating-linear-gradient(
+        90deg,
+        rgba(94, 63, 60, 0.35) 0,
+        rgba(94, 63, 60, 0.35) 4px,
+        transparent 4px,
+        transparent 8px
+      ),
+      var(--color-surface-high);
+    overflow: hidden;
+  }
+
+  .speed-bar__fill {
+    display: block;
+    height: 100%;
+    width: 78%;
+    background:
+      repeating-linear-gradient(
+        90deg,
+        var(--color-warning) 0,
+        var(--color-warning) 4px,
+        transparent 4px,
+        transparent 8px
+      ),
+      linear-gradient(to right, var(--color-accent-dim), var(--color-accent));
+    opacity: 0.95;
+  }
 }

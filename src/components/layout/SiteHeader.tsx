@@ -1,11 +1,13 @@
 "use client";
 
+import Image from "next/image";
 import Container from "@/components/layout/Container";
 import LocaleLink from "@/components/ui/LocaleLink";
 import LocaleSwitcher from "@/components/nav/LocaleSwitcher";
 import { navItems } from "@/data/nav";
 import { useTranslations } from "next-intl";
 import { usePathname } from "@/i18n/navigation";
+import logoImage from "@/pic/logo.png";
 
 export default function SiteHeader() {
   const pathname = usePathname();
@@ -17,7 +19,15 @@ export default function SiteHeader() {
       <Container wide>
         <div className="flex min-h-[78px] items-center justify-between gap-6 border-b border-[var(--color-border)] py-3">
           <LocaleLink href="/" className="flex min-w-0 items-center gap-3">
-            <span className="h-2.5 w-2.5 bg-[var(--color-warning)] shadow-[0_0_18px_rgba(234,234,0,0.4)]" />
+            <div className="flex h-11 w-11 items-center justify-center bg-[linear-gradient(to_bottom_right,rgba(255,84,76,0.18),rgba(255,84,76,0.02))] [background-color:var(--color-surface-low)]">
+              <Image
+                src={logoImage}
+                alt="CJ logo"
+                className="h-8 w-8 object-contain"
+                sizes="44px"
+                priority
+              />
+            </div>
             <div className="min-w-0">
               <span className="block truncate text-sm font-semibold uppercase tracking-[0.08em] text-[var(--color-text)]">
                 {t("brandName")}

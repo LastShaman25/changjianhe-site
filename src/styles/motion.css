@@ -16,6 +16,19 @@
   }
 }
 
+@keyframes pulse-indicator {
+  0%,
+  100% {
+    opacity: 0.45;
+    transform: scale(0.96);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 .research-ticker {
   color: var(--color-text-muted);
   letter-spacing: 0.15em;

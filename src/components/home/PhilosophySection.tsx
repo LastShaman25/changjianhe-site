@@ -14,6 +14,17 @@ export default function PhilosophySection({
   title,
   text
 }: PhilosophySectionProps) {
+  const titleLines =
+    title === "Powerful systems should also be trustworthy systems."
+      ? [
+          "Powerful systems should also be",
+          <span key="trustworthy">
+            <em className="text-[var(--color-accent)] not-italic">trustworthy</em>
+            {" systems."}
+          </span>
+        ]
+      : [title];
+
   return (
     <Section>
       <Container>
@@ -22,29 +33,7 @@ export default function PhilosophySection({
             <ScrollFadeIn>
               <p className="section-label">{eyebrow}</p>
             </ScrollFadeIn>
-            <HeadlineReveal
-              className="headline-lg mt-6 max-w-xl"
-              lines={
-                title === "Powerful systems should also be trustworthy systems."
-                  ? [
-                      "Powerful systems should also be",
-                      <span key="trustworthy">
-                        {/* ACCENT: confirm this word */}
-                        <em className="text-[var(--color-accent)] not-italic">trustworthy</em>
-                        {" systems."}
-                      </span>
-                    ]
-                  : [
-                      "强大的系统，",
-                      <span key="trustworthy-zh">
-                        "也应当是"
-                        {/* ACCENT: confirm this word */}
-                        <em className="text-[var(--color-accent)] not-italic">可信</em>
-                        "的系统。"
-                      </span>
-                    ]
-              }
-            />
+            <HeadlineReveal className="headline-lg mt-6 max-w-xl" lines={titleLines} />
           </div>
 
           <div className="metal-panel p-8 sm:p-10">

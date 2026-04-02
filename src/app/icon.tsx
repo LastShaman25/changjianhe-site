@@ -1,4 +1,6 @@
 import { ImageResponse } from "next/og";
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
 
 export const size = {
   width: 512,
@@ -7,7 +9,11 @@ export const size = {
 
 export const contentType = "image/png";
 
-export default function Icon() {
+export default async function Icon() {
+  const logoPath = join(process.cwd(), "src", "pic", "logo.png");
+  const logoBuffer = await readFile(logoPath);
+  const logoDataUrl = `data:image/png;base64,${logoBuffer.toString("base64")}`;
+
   return new ImageResponse(
     (
       <div
@@ -16,42 +22,31 @@ export default function Icon() {
           height: "100%",
           width: "100%",
           background:
-            "radial-gradient(circle at top, rgba(255,255,255,0.16), transparent 38%), linear-gradient(180deg, #0f1115 0%, #060709 100%)",
-          borderRadius: 96,
-          border: "1px solid rgba(255,255,255,0.12)",
+            "radial-gradient(circle at top right, rgba(255,84,76,0.22), transparent 38%), linear-gradient(180deg, #171716 0%, #0e0e0e 100%)",
           alignItems: "center",
-          justifyContent: "center",
-          fontFamily: "Arial, sans-serif"
+          justifyContent: "center"
         }}
       >
         <div
           style={{
             display: "flex",
-            flexDirection: "column",
+            height: 380,
+            width: 380,
+            background: "linear-gradient(180deg, rgba(255,84,76,0.14), rgba(255,84,76,0.02))",
             alignItems: "center",
-            gap: 18
+            justifyContent: "center"
           }}
         >
-          <div
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={logoDataUrl}
+            alt="CJ logo"
             style={{
-              width: 18,
-              height: 18,
-              borderRadius: 999,
-              background: "#d7dce5",
-              boxShadow: "0 0 24px rgba(215,220,229,0.6)"
+              width: 280,
+              height: 280,
+              objectFit: "contain"
             }}
           />
-          <div
-            style={{
-              fontSize: 184,
-              fontWeight: 700,
-              lineHeight: 1,
-              letterSpacing: "-0.08em",
-              color: "#f5f7fa"
-            }}
-          >
-            CJ
-          </div>
         </div>
       </div>
     ),

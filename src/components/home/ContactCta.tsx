@@ -21,6 +21,17 @@ export default function ContactCta({
   primary,
   secondary
 }: ContactCtaProps) {
+  const titleLines =
+    title === "Open to research, product, and infrastructure conversations."
+      ? [
+          "Open to research, product, and",
+          <span key="infrastructure">
+            <em className="text-[var(--color-accent)] not-italic">infrastructure</em>
+            {" conversations."}
+          </span>
+        ]
+      : [title];
+
   return (
     <Section>
       <Container>
@@ -33,28 +44,7 @@ export default function ContactCta({
 
             <div className="mt-6 grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
               <div>
-                <HeadlineReveal
-                  className="headline-xl max-w-3xl"
-                  lines={
-                    title === "Open to research, product, and infrastructure conversations."
-                      ? [
-                          "Open to research, product, and",
-                          <span key="infrastructure">
-                            {/* ACCENT: confirm this word */}
-                            <em className="text-[var(--color-accent)] not-italic">infrastructure</em>
-                            {" conversations."}
-                          </span>
-                        ]
-                      : [
-                          "欢迎交流研究、产品与",
-                          <span key="infrastructure-zh">
-                            {/* ACCENT: confirm this word */}
-                            <em className="text-[var(--color-accent)] not-italic">基础设施</em>
-                            "相关机会。"
-                          </span>
-                        ]
-                  }
-                />
+                <HeadlineReveal className="headline-xl max-w-3xl" lines={titleLines} />
                 <ScrollFadeIn delay={0.44}>
                   <p className="body-lg mt-6 max-w-2xl">{text}</p>
                 </ScrollFadeIn>
@@ -63,11 +53,7 @@ export default function ContactCta({
               <div className="flex flex-wrap items-end gap-4 lg:justify-end">
                 <ScrollFadeIn delay={0.52} className="flex flex-wrap items-end gap-4 lg:justify-end">
                   <MotionButtonWrap>
-                    <LocaleLink
-                      href="/contact"
-                      className="btn-primary"
-                      data-contact-primary
-                    >
+                    <LocaleLink href="/contact" className="btn-primary" data-contact-primary>
                       {primary}
                     </LocaleLink>
                   </MotionButtonWrap>
