@@ -28,7 +28,7 @@ export default function LocaleSwitcher() {
       <button
         type="button"
         onClick={() => handleSwitch("zh")}
-        className={`rounded-full px-3 py-1.5 text-sm transition ${
+        className={`inline-flex min-w-[3.75rem] items-center justify-center whitespace-nowrap rounded-full px-2.5 py-1.5 text-sm leading-none transition ${
           locale === "zh"
             ? "bg-white text-black shadow-[0_8px_18px_rgba(255,255,255,0.16)]"
             : "text-[var(--color-text-soft)] hover:bg-white/10"
