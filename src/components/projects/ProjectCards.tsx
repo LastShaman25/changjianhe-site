@@ -22,7 +22,7 @@ type ProjectCardsProps = {
 
 export default function ProjectCards({
   items,
-  titleClassName = "headline-lg mt-5 text-[1.7rem]"
+  titleClassName = "headline-lg mt-5 max-w-full text-[1.38rem] leading-[0.98] break-normal"
 }: ProjectCardsProps) {
   const reduceMotion = useHydratedReducedMotion();
   const gridRef = useRef<HTMLDivElement>(null);
@@ -89,9 +89,10 @@ export default function ProjectCards({
   }, [reduceMotion, items]);
 
   return (
-    <div ref={gridRef} className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+    <div ref={gridRef} className="grid gap-6 md:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3 items-stretch">
       {items.map((item) => (
         <motion.div
+          className="h-full"
           key={item.key}
           data-project-card
           data-parallax-y={item.parallaxY ?? 0}

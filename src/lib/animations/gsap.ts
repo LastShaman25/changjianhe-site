@@ -26,12 +26,17 @@ export function setupLenisScrollSync() {
   const tick = (time: number) => {
     lenis.raf(time * 1000);
   };
+  const rafId = window.requestAnimationFrame(() => {
+    lenis.scrollTo(window.scrollY, { immediate: true });
+    ScrollTrigger.refresh();
+  });
 
   lenis.on("scroll", updateScrollTrigger);
   gsap.ticker.add(tick);
   gsap.ticker.lagSmoothing(0);
 
   return () => {
+    window.cancelAnimationFrame(rafId);
     lenis.off("scroll", updateScrollTrigger);
     gsap.ticker.remove(tick);
     lenis.destroy();

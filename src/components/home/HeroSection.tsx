@@ -35,6 +35,7 @@ export default function HeroSection({
   const t = useTranslations("HomePage");
   const reduceMotion = useHydratedReducedMotion();
   const [showAllDesktopContent, setShowAllDesktopContent] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   const heroSectionRef = useRef<HTMLDivElement>(null);
   const heroGridRef = useRef<HTMLDivElement>(null);
@@ -50,8 +51,9 @@ export default function HeroSection({
   useEffect(() => {
     const widthQuery = window.matchMedia("(max-width: 1023px)");
     const updateRenderMode = () => {
-      const useFallbackLayout = widthQuery.matches;
-      setShowAllDesktopContent(useFallbackLayout || !!reduceMotion);
+      const mobile = widthQuery.matches;
+      setIsMobile(mobile);
+      setShowAllDesktopContent(mobile);
     };
 
     updateRenderMode();
@@ -284,7 +286,13 @@ export default function HeroSection({
   ];
 
   return (
-    <div ref={heroSectionRef} className="-mt-[102px] h-[calc(100vh+102px)]">
+    <div
+      ref={heroSectionRef}
+      style={{
+        marginTop: "calc(-1 * var(--header-height, 0px))",
+        height: "calc(100vh + var(--header-height, 0px))"
+      }}
+    >
       <Section className="relative h-full overflow-hidden hairline-grid pt-0 pb-0">
         <div className="relative h-full w-full">
         <div className="pointer-events-none absolute inset-0 z-[-1] overflow-hidden">
@@ -363,7 +371,7 @@ export default function HeroSection({
 
         <p
           ref={introRef}
-          className={`body-lg absolute top-[26%] left-4 z-10 max-w-sm lg:left-8 ${
+          className={`body-lg absolute top-[26%] left-4 z-10 max-w-sm lg:left-auto lg:right-[calc(50%+15rem)] ${
             showAllDesktopContent ? "" : "lg:opacity-0"
           }`}
         >
@@ -372,7 +380,7 @@ export default function HeroSection({
 
         <div
           ref={signalsRef}
-          className={`absolute top-[26%] right-4 z-10 flex max-w-[18rem] flex-col gap-4 lg:right-8 ${
+          className={`absolute top-[26%] right-4 z-10 flex max-w-[18rem] flex-col gap-4 lg:right-auto lg:left-[calc(50%+18rem)] ${
             showAllDesktopContent ? "" : "lg:opacity-0"
           }`}
         >

@@ -85,7 +85,7 @@ export default function FeaturedProjects({
           </ScrollFadeIn>
           <div ref={headlineWrapRef}>
             <HeadlineReveal
-              className="headline-xl mt-6 overflow-visible will-change-transform md:whitespace-nowrap"
+              className="headline-xl mt-6 overflow-visible pb-[0.12em] will-change-transform md:whitespace-nowrap"
               lines={titleLines}
             />
           </div>
@@ -100,7 +100,10 @@ export default function FeaturedProjects({
               key: project.slug,
               href: project.href,
               eyebrow: project.category[locale],
-              title: project.title[locale],
+              title:
+                project.slug === "elementization" && locale === "en"
+                  ? "ELEMENTIZATION INFRA"
+                  : project.title[locale],
               summary: project.summary[locale],
               parallaxY:
                 project.slug === "elementization"

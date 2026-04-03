@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import Image from "next/image";
 import Container from "@/components/layout/Container";
 import LocaleLink from "@/components/ui/LocaleLink";
@@ -13,6 +14,28 @@ export default function SiteHeader() {
   const pathname = usePathname();
   const t = useTranslations("Site");
   const navT = useTranslations("Site.nav");
+
+  useEffect(() => {
+    const header = document.querySelector("header");
+
+    if (!header) {
+      return;
+    }
+
+    const updateHeaderHeight = () => {
+      document.documentElement.style.setProperty(
+        "--header-height",
+        `${header.offsetHeight}px`
+      );
+    };
+
+    updateHeaderHeight();
+
+    const observer = new ResizeObserver(updateHeaderHeight);
+    observer.observe(header);
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <header className="sticky top-0 z-50 bg-[rgba(19,19,19,0.86)] backdrop-blur-xl">
