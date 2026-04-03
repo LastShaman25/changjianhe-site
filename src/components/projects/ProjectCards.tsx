@@ -12,6 +12,7 @@ type ProjectCardItem = {
   eyebrow: string;
   title: string;
   summary: string;
+  parallaxY?: number;
 };
 
 type ProjectCardsProps = {
@@ -27,7 +28,11 @@ export default function ProjectCards({
   const gridRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (reduceMotion || !gridRef.current) {
+    if (
+      reduceMotion ||
+      !gridRef.current ||
+      window.matchMedia("(hover: none)").matches
+    ) {
       return;
     }
 
@@ -35,6 +40,7 @@ export default function ProjectCards({
 
     const ctx = gsap.context(() => {
       const cards = gsap.utils.toArray<HTMLElement>("[data-project-card]");
+      const parallaxCards = gsap.utils.toArray<HTMLElement>("[data-parallax-y]");
 
       gsap.set(cards, {
         opacity: 0,
@@ -55,6 +61,26 @@ export default function ProjectCards({
           });
         }
       });
+
+      parallaxCards.forEach((card) => {
+        const targetY = Number(card.dataset.parallaxY ?? "0");
+
+        if (targetY === 0) {
+          return;
+        }
+
+        gsap.to(card, {
+          y: targetY,
+          ease: "none",
+          scrollTrigger: {
+            trigger: card.closest("section") ?? card,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 1,
+            invalidateOnRefresh: true
+          }
+        });
+      });
     }, gridRef);
 
     return () => {
@@ -68,6 +94,7 @@ export default function ProjectCards({
         <motion.div
           key={item.key}
           data-project-card
+          data-parallax-y={item.parallaxY ?? 0}
           initial={reduceMotion ? false : { opacity: 0, y: 40 }}
           animate={reduceMotion ? { opacity: 1, y: 0 } : undefined}
           whileHover={reduceMotion ? undefined : { y: -4 }}

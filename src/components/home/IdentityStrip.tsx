@@ -1,7 +1,12 @@
+"use client";
+
+import { useEffect, useRef } from "react";
 import Container from "@/components/layout/Container";
 import Section from "@/components/layout/Section";
 import HeadlineReveal from "@/components/motion/HeadlineReveal";
 import ScrollFadeIn from "@/components/motion/ScrollFadeIn";
+import useHydratedReducedMotion from "@/components/motion/useHydratedReducedMotion";
+import { ensureGsapRegistered, gsap } from "@/lib/animations/gsap";
 
 type IdentityStripProps = {
   eyebrow: string;
@@ -14,10 +19,50 @@ export default function IdentityStrip({
   title,
   text
 }: IdentityStripProps) {
+  const reduceMotion = useHydratedReducedMotion();
+  const sectionRef = useRef<HTMLElement>(null);
+  const backgroundRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (
+      reduceMotion ||
+      !sectionRef.current ||
+      !backgroundRef.current ||
+      window.matchMedia("(hover: none)").matches
+    ) {
+      return;
+    }
+
+    ensureGsapRegistered();
+
+    const tween = gsap.to(backgroundRef.current, {
+      y: -15,
+      ease: "none",
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: "top bottom",
+        end: "bottom top",
+        scrub: 1,
+        invalidateOnRefresh: true
+      }
+    });
+
+    return () => {
+      tween.scrollTrigger?.kill();
+      tween.kill();
+    };
+  }, [reduceMotion]);
+
   return (
-    <Section>
+    <Section ref={sectionRef}>
       <Container>
-        <div className="metal-panel p-8 sm:p-10 lg:p-12">
+        <div className="relative">
+          <div
+            ref={backgroundRef}
+            aria-hidden="true"
+            className="metal-panel absolute inset-0 will-change-transform"
+          />
+          <div className="relative p-8 sm:p-10 lg:p-12">
           <ScrollFadeIn>
             <p className="section-label">{eyebrow}</p>
           </ScrollFadeIn>
@@ -53,6 +98,7 @@ export default function IdentityStrip({
                 <p className="body-md max-w-xl">{text}</p>
               </ScrollFadeIn>
             </div>
+          </div>
           </div>
         </div>
       </Container>

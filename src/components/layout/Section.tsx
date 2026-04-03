@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { forwardRef, ReactNode } from "react";
 import { cn } from "@/lib/utils/cn";
 
 type SectionProps = {
@@ -7,10 +7,15 @@ type SectionProps = {
   id?: string;
 };
 
-export default function Section({ children, className, id }: SectionProps) {
+const Section = forwardRef<HTMLElement, SectionProps>(function Section(
+  { children, className, id },
+  ref
+) {
   return (
-    <section id={id} className={cn("section-pad", className)}>
+    <section ref={ref} id={id} className={cn("section-pad", className)}>
       {children}
     </section>
   );
-}
+});
+
+export default Section;
