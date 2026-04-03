@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { useReducedMotion } from "framer-motion";
+import useHydratedReducedMotion from "@/components/motion/useHydratedReducedMotion";
 import { ensureGsapRegistered, gsap, ScrollTrigger } from "@/lib/animations/gsap";
 
 type FocusItem = {
@@ -14,7 +14,7 @@ type AboutFocusAreasProps = {
 };
 
 export default function AboutFocusAreas({ items }: AboutFocusAreasProps) {
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = useHydratedReducedMotion();
   const gridRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {

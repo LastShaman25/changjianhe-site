@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { useReducedMotion } from "framer-motion";
+import useHydratedReducedMotion from "@/components/motion/useHydratedReducedMotion";
 import { cn } from "@/lib/utils/cn";
 import { ensureGsapRegistered, gsap, ScrollTrigger } from "@/lib/animations/gsap";
 
@@ -17,7 +17,7 @@ type MetricStripProps = {
 };
 
 export default function MetricStrip({ items, className }: MetricStripProps) {
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = useHydratedReducedMotion();
   const stripRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {

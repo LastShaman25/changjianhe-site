@@ -80,7 +80,7 @@ export default function ProjectCards({
             href={item.href}
             className="metal-card group block h-full p-6 transition-shadow duration-[250ms] hover:shadow-[var(--shadow-panel)]"
           >
-            <p className="section-label">{item.eyebrow}</p>
+            <p className="glass-badge">{item.eyebrow}</p>
             <h4 className={`${titleClassName} transition group-hover:translate-x-[2px]`}>
               {item.title}
             </h4>

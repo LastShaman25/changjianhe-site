@@ -9,7 +9,6 @@ import { motion } from "framer-motion";
 import useHydratedReducedMotion from "@/components/motion/useHydratedReducedMotion";
 import MotionButtonWrap from "@/components/motion/MotionButtonWrap";
 import headshotImage from "@/pic/headshot.jpg";
-import logoImage from "@/pic/logo_black.png";
 
 type HeroSectionProps = {
   eyebrow: string;
@@ -32,7 +31,9 @@ export default function HeroSection({
   const heroBlockRef = useRef<HTMLDivElement>(null);
   const nameWords = name.split(" ");
   const easeCurve = [0.22, 1, 0.36, 1] as const;
-  const lastNameWordDelay = Math.max(nameWords.length - 1, 0) * 0.08;
+  const lastNameWordStartDelay = Math.max(nameWords.length - 1, 0) * 0.08;
+  const subtitleDelay = reduceMotion ? 0 : lastNameWordStartDelay + 0.6 + 0.2;
+  const ctaDelay = reduceMotion ? 0 : subtitleDelay + 0.6 + 0.3;
   const [enableTilt, setEnableTilt] = useState(false);
   const telemetryTags = ["AI RESEARCH", "APPLIED MATH", "DEPLOYABLE SYSTEMS"];
 
@@ -79,6 +80,24 @@ export default function HeroSection({
   };
 
   const sectionVariants = reduceMotion
+    ? {
+        hidden: {},
+        visible: {
+          transition: {
+            staggerChildren: 0
+          }
+        }
+      }
+    : {
+        hidden: {},
+        visible: {
+          transition: {
+            staggerChildren: 0.08
+          }
+        }
+      };
+
+  const nameGroupVariants = reduceMotion
     ? {
         hidden: {},
         visible: {
@@ -204,7 +223,12 @@ export default function HeroSection({
             </motion.div>
 
             <h1 className="display-title mt-8 max-w-5xl">
-              <span className="silver-text">
+              <motion.span
+                className="silver-text"
+                initial="hidden"
+                animate="visible"
+                variants={nameGroupVariants}
+              >
                 {nameWords.map((word, index) => (
                   <motion.span
                     key={`${word}-${index}`}
@@ -215,7 +239,7 @@ export default function HeroSection({
                     {index < nameWords.length - 1 ? "\u00A0" : ""}
                   </motion.span>
                 ))}
-              </span>
+              </motion.span>
             </h1>
 
             <motion.h2
@@ -224,7 +248,7 @@ export default function HeroSection({
               animate={{ opacity: 1, y: 0 }}
               transition={{
                 duration: reduceMotion ? 0 : 0.6,
-                delay: reduceMotion ? 0 : 0.2 + lastNameWordDelay,
+                delay: subtitleDelay,
                 ease: easeCurve
               }}
             >
@@ -237,7 +261,7 @@ export default function HeroSection({
               animate={{ opacity: 1, y: 0 }}
               transition={{
                 duration: reduceMotion ? 0 : 0.6,
-                delay: reduceMotion ? 0 : 0.28 + lastNameWordDelay,
+                delay: reduceMotion ? 0 : 0.28 + lastNameWordStartDelay,
                 ease: easeCurve
               }}
             >
@@ -250,7 +274,7 @@ export default function HeroSection({
               animate={{ opacity: 1, scale: 1 }}
               transition={{
                 duration: reduceMotion ? 0 : 0.45,
-                delay: reduceMotion ? 0 : 0.3 + lastNameWordDelay,
+                delay: ctaDelay,
                 ease: easeCurve
               }}
             >
@@ -273,7 +297,7 @@ export default function HeroSection({
               animate={{ opacity: 1, y: 0 }}
               transition={{
                 duration: reduceMotion ? 0 : 0.5,
-                delay: reduceMotion ? 0 : 0.38 + lastNameWordDelay,
+                delay: reduceMotion ? 0 : ctaDelay + 0.08,
                 ease: easeCurve
               }}
             >
@@ -298,7 +322,7 @@ export default function HeroSection({
             animate={{ opacity: 1, x: 0 }}
             transition={{
               duration: reduceMotion ? 0 : 0.7,
-              delay: reduceMotion ? 0 : 0.24 + lastNameWordDelay,
+              delay: reduceMotion ? 0 : subtitleDelay + 0.04,
               ease: easeCurve
             }}
           >
@@ -316,7 +340,7 @@ export default function HeroSection({
               </div>
             </div>
 
-            <div className="mt-4 grid gap-4 sm:grid-cols-2">
+            <div className="mt-4">
               <div className="hero-side-panel">
                 <div className="flex items-center justify-between gap-3">
                   <span className="hero-metric-label">PROFILE</span>
@@ -325,22 +349,6 @@ export default function HeroSection({
                 <p className="hero-side-copy mt-3">
                   Technical depth, mathematical rigor, and real-world deployment.
                 </p>
-              </div>
-
-              <div className="hero-side-panel">
-                <div className="flex items-center justify-between gap-3">
-                  <span className="hero-metric-label">SIGNAL</span>
-                  <Image
-                    src={logoImage}
-                    alt="CJ logo"
-                    className="h-16 w-auto object-contain opacity-90"
-                    sizes="64px"
-                  />
-                </div>
-                <div className="speed-bar mt-3" aria-hidden="true">
-                  <span className="speed-bar__fill" />
-                </div>
-                <p className="hero-side-copy mt-3">Research, infrastructure, and product execution.</p>
               </div>
             </div>
           </motion.div>
