@@ -1,4 +1,4 @@
-import { getTranslations } from "next-intl/server";
+import { getMessages, getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 import type { Locale } from "@/data/projects";
 import SiteShell from "@/components/layout/SiteShell";
@@ -7,11 +7,7 @@ import ContentBody from "@/components/layout/ContentBody";
 import MdxContent from "@/components/content/MdxContent";
 import StoryPageShell from "@/components/story/StoryPageShell";
 import ElementizationHero from "@/components/story/elementization/ElementizationHero";
-import DataWorldScene from "@/components/story/elementization/DataWorldScene";
-import TransformationGateScene from "@/components/story/elementization/TransformationGateScene";
-import TransposedLayerScene from "@/components/story/elementization/TransposedLayerScene";
-import TrustBoundaryScene from "@/components/story/elementization/TrustBoundaryScene";
-import DeployableAiScene from "@/components/story/elementization/DeployableAiScene";
+import ElementizationPinnedStory from "@/components/story/elementization/ElementizationPinnedStory";
 import { loadMdx } from "@/lib/mdx/loadMdx";
 import { buildPageMetadata } from "@/lib/seo";
 
@@ -34,21 +30,28 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function ElementizationPage({ params }: PageProps) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "Stories.elementization" });
+  const messages = (await getMessages()) as {
+    Stories: {
+      elementization: {
+        shared: {
+          glyphs: string[];
+        };
+        trustBoundary: {
+          label: string;
+        };
+        deployableAi: {
+          badges: string[];
+        };
+      };
+    };
+  };
   const { Component } = await loadMdx({ locale, section: "projects", slug: "elementization" });
+  const storyData = messages.Stories.elementization;
 
   return (
     <SiteShell>
       <main>
-        <StoryPageShell
-          progressItems={[
-            { id: "elementization-hero", label: t("hero.eyebrow") },
-            { id: "elementization-data-world", label: t("dataWorld.eyebrow") },
-            { id: "elementization-gate", label: t("transformationGate.eyebrow") },
-            { id: "elementization-layer", label: t("transposedLayer.eyebrow") },
-            { id: "elementization-boundary", label: t("trustBoundary.eyebrow") },
-            { id: "elementization-deploy", label: t("deployableAi.eyebrow") }
-          ]}
-        >
+        <StoryPageShell>
           <ElementizationHero
             id="elementization-hero"
             eyebrow={t("hero.eyebrow")}
@@ -63,38 +66,38 @@ export default async function ElementizationPage({ params }: PageProps) {
             ctaSecondary={t("hero.ctaSecondary")}
           />
 
-          <div id="elementization-story">
-            <DataWorldScene
-              eyebrow={t("dataWorld.eyebrow")}
-              title={t("dataWorld.title")}
-              body={t("dataWorld.body")}
-              id="elementization-data-world"
-            />
-            <TransformationGateScene
-              eyebrow={t("transformationGate.eyebrow")}
-              title={t("transformationGate.title")}
-              body={t("transformationGate.body")}
-              id="elementization-gate"
-            />
-            <TransposedLayerScene
-              eyebrow={t("transposedLayer.eyebrow")}
-              title={t("transposedLayer.title")}
-              body={t("transposedLayer.body")}
-              id="elementization-layer"
-            />
-            <TrustBoundaryScene
-              eyebrow={t("trustBoundary.eyebrow")}
-              title={t("trustBoundary.title")}
-              body={t("trustBoundary.body")}
-              id="elementization-boundary"
-            />
-            <DeployableAiScene
-              eyebrow={t("deployableAi.eyebrow")}
-              title={t("deployableAi.title")}
-              body={t("deployableAi.body")}
-              id="elementization-deploy"
-            />
-          </div>
+          <ElementizationPinnedStory
+            id="elementization-story"
+            locale={locale}
+            dataWorld={{
+              eyebrow: t("dataWorld.eyebrow"),
+              title: t("dataWorld.title"),
+              body: t("dataWorld.body")
+            }}
+            transformationGate={{
+              eyebrow: t("transformationGate.eyebrow"),
+              title: t("transformationGate.title"),
+              body: t("transformationGate.body")
+            }}
+            transposedLayer={{
+              eyebrow: t("transposedLayer.eyebrow"),
+              title: t("transposedLayer.title"),
+              body: t("transposedLayer.body")
+            }}
+            trustBoundary={{
+              eyebrow: t("trustBoundary.eyebrow"),
+              title: t("trustBoundary.title"),
+              body: t("trustBoundary.body")
+            }}
+            deployableAi={{
+              eyebrow: t("deployableAi.eyebrow"),
+              title: t("deployableAi.title"),
+              body: t("deployableAi.body")
+            }}
+            glyphs={storyData.shared.glyphs}
+            trustBoundaryLabel={storyData.trustBoundary.label}
+            deployableBadges={storyData.deployableAi.badges}
+          />
         </StoryPageShell>
 
         <Section id="elementization-notes">

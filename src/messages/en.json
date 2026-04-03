@@ -46,7 +46,15 @@
     "contactTitle": "Open to research, product, and infrastructure conversations.",
     "contactText": "I am open to opportunities across applied AI, secure systems, technical strategy, and ambitious product-building.",
     "contactPrimary": "Get in Touch",
-    "contactSecondary": "LinkedIn"
+    "contactSecondary": "LinkedIn",
+    "heroMetrics": {
+      "modeLabel": "Mode",
+      "modeValue": "Research",
+      "statusLabel": "Status",
+      "statusValue": "Building",
+      "surfaceLabel": "Surface",
+      "surfaceValue": "Deployable AI"
+    }
   },
   "Stories": {
     "elementization": {
@@ -65,6 +73,22 @@
         "title": "The raw state is rich, unstable, and operationally difficult.",
         "body": "The story begins in a world of heterogeneous signals, fragments, and noisy data conditions. Valuable intelligence is present, but the environment is too uncontrolled to serve as the long-term operating surface for real deployment."
       },
+      "shared": {
+        "glyphs": [
+          "0.847",
+          "[NULL]",
+          "17ms",
+          "A-19",
+          "42%",
+          "7F",
+          "3.14",
+          "00FF",
+          "12:7",
+          "1.2e3",
+          "9x",
+          "B-04"
+        ]
+      },
       "transformationGate": {
         "eyebrow": "Transformation Gate",
         "title": "Conversion starts when the system imposes rails, gates, and selective flow.",
@@ -78,12 +102,18 @@
       "trustBoundary": {
         "eyebrow": "Trust Boundary",
         "title": "The raw domain is explicitly locked out rather than implicitly trusted.",
-        "body": "A core part of the architecture is making the trust boundary visible. The system should not quietly assume unrestricted raw-data dependence. It should mark where trust ends and where governed operation begins."
+        "body": "A core part of the architecture is making the trust boundary visible. The system should not quietly assume unrestricted raw-data dependence. It should mark where trust ends and where governed operation begins.",
+        "label": "TRUST BOUNDARY"
       },
       "deployableAi": {
         "eyebrow": "Deployable AI",
         "title": "What remains is a cleaner, more governable path to real deployment.",
-        "body": "Once trainability, governance, and separation are built into the system, AI becomes easier to operationalize in environments where privacy, regulation, and institutional trust matter."
+        "body": "Once trainability, governance, and separation are built into the system, AI becomes easier to operationalize in environments where privacy, regulation, and institutional trust matter.",
+        "badges": [
+          "TRAINABLE",
+          "GOVERNED",
+          "DEPLOYABLE"
+        ]
       },
       "notes": {
         "eyebrow": "Project Notes",
@@ -128,12 +158,83 @@
         "body": "The final step is to connect the attack back to evaluation. Curves, metrics, and formula-style reasoning make the risk legible and tie the story back to paper-level technical results.",
         "metricsLabel": "Metrics Panels",
         "formulasLabel": "Formula Blocks",
-        "paperLabel": "Paper Context"
+        "paperLabel": "Paper Context",
+        "paperCta": "Read the Paper →",
+        "formulaLeft": "score(x) → confidence",
+        "formulaRight": "probe(x + Δ) → shift"
       },
       "notes": {
         "eyebrow": "Research Notes",
         "title": "Long-form project context",
         "description": "The MDX notes below preserve the written research framing, contribution, and security significance of the ALOA project."
+      }
+    },
+    "aiLearningAssistant": {
+      "signal": {
+        "eyebrow": "The Signal",
+        "title": "Learning generates more signal than most systems know how to use.",
+        "body": "Student activity - quiz results, time on task, module completion - arrives as scattered, unstructured behavioral data. The system's first job is to receive it all.",
+        "tokens": [
+          "QUIZ RESULTS",
+          "TIME ON TASK",
+          "MODULE COMPLETION",
+          "DISCUSSION ACTIVITY",
+          "PAGE VIEWS"
+        ]
+      },
+      "engine": {
+        "eyebrow": "The Engine",
+        "title": "Five dimensions describe how a student actually learns.",
+        "body": "Raw signals pass through the Learning Pace & Handling Evaluation Engine. They resolve into five structured dimensions: Learning Pace, Handling Stability, Concept Mastery, Knowledge Load Capacity, and Risk Signals.",
+        "dimensions": [
+          "LEARNING PACE",
+          "HANDLING STABILITY",
+          "CONCEPT MASTERY",
+          "KNOWLEDGE LOAD",
+          "RISK SIGNALS"
+        ]
+      },
+      "adaptation": {
+        "eyebrow": "Adaptation",
+        "title": "The system adjusts instruction, not just content.",
+        "body": "Evaluation outputs drive three adaptive responses: recitation frequency, knowledge intensity, and teaching action selection. Every session is different because every student profile is different.",
+        "outputs": [
+          "RECITATION ADJUSTMENT",
+          "KNOWLEDGE INTENSITY",
+          "TEACHING STRATEGY"
+        ],
+        "subLabels": [
+          "frequency · interval · recall",
+          "density · compression · load",
+          "explain · quiz · recommend"
+        ]
+      },
+      "loop": {
+        "eyebrow": "The Loop",
+        "title": "Every interaction recalibrates the system.",
+        "body": "Outputs feed back as new inputs. The loop - Evaluate, Adjust, Observe, Recalibrate - runs continuously. The system does not converge to a fixed state. It keeps moving with the student.",
+        "nodes": [
+          "EVALUATE",
+          "ADJUST",
+          "OBSERVE",
+          "RECALIBRATE"
+        ]
+      },
+      "institutionalFit": {
+        "eyebrow": "Institutional Fit",
+        "title": "Designed to work inside real academic environments.",
+        "body": "Instructor analytics, completion forecasting, and risk alerts ensure the system supports human oversight. Deployable where it matters most: inside institutions that cannot afford to get learning wrong.",
+        "oversightLabel": "INSTRUCTOR OVERSIGHT",
+        "blocks": [
+          "IDENTIFY STRUGGLING STUDENTS",
+          "ADJUST INSTRUCTION & PACING",
+          "MONITOR CLASS PROGRESS"
+        ]
+      },
+      "notes": {
+        "eyebrow": "Project Notes",
+        "title": "Long-form project context",
+        "description": "The MDX notes below preserve the written product framing, educational system logic, and institutional deployment context of the AI Learning Assistant."
       }
     }
   },

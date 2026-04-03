@@ -2,7 +2,9 @@ import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 import type { Locale } from "@/data/projects";
 import SiteShell from "@/components/layout/SiteShell";
+import { HERO_MODE } from "@/config/heroMode";
 import HeroSection from "@/components/home/HeroSection";
+import HeroSectionClassic from "@/components/home/HeroSectionClassic";
 import IdentityStrip from "@/components/home/IdentityStrip";
 import FeaturedProjects from "@/components/home/FeaturedProjects";
 import PhilosophySection from "@/components/home/PhilosophySection";
@@ -31,18 +33,23 @@ export async function generateMetadata({ params }: HomePageProps): Promise<Metad
 export default async function HomePage({ params }: HomePageProps) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "HomePage" });
+  const heroProps = {
+    eyebrow: t("heroEyebrow"),
+    name: t("name"),
+    title: t("title"),
+    intro: t("intro"),
+    ctaPrimary: t("ctaPrimary"),
+    ctaSecondary: t("ctaSecondary")
+  };
 
   return (
     <SiteShell>
       <main>
-        <HeroSection
-          eyebrow={t("heroEyebrow")}
-          name={t("name")}
-          title={t("title")}
-          intro={t("intro")}
-          ctaPrimary={t("ctaPrimary")}
-          ctaSecondary={t("ctaSecondary")}
-        />
+        {HERO_MODE === "cinematic" ? (
+          <HeroSection {...heroProps} />
+        ) : (
+          <HeroSectionClassic {...heroProps} />
+        )}
 
         <IdentityStrip
           eyebrow={t("identityEyebrow")}

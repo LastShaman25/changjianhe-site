@@ -7,11 +7,7 @@ import ContentBody from "@/components/layout/ContentBody";
 import MdxContent from "@/components/content/MdxContent";
 import StoryPageShell from "@/components/story/StoryPageShell";
 import AloaHero from "@/components/story/aloa/AloaHero";
-import TwoTowerScene from "@/components/story/aloa/TwoTowerScene";
-import EmbeddingFieldScene from "@/components/story/aloa/EmbeddingFieldScene";
-import PerturbationScene from "@/components/story/aloa/PerturbationScene";
-import InferenceScene from "@/components/story/aloa/InferenceScene";
-import ChartsScene from "@/components/story/aloa/ChartsScene";
+import AloaPinnedStory from "@/components/story/aloa/AloaPinnedStory";
 import { loadMdx } from "@/lib/mdx/loadMdx";
 import { buildPageMetadata } from "@/lib/seo";
 
@@ -39,16 +35,7 @@ export default async function AloaPage({ params }: PageProps) {
   return (
     <SiteShell>
       <main>
-        <StoryPageShell
-          progressItems={[
-            { id: "aloa-hero", label: t("hero.eyebrow") },
-            { id: "aloa-two-tower", label: t("twoTower.eyebrow") },
-            { id: "aloa-field", label: t("embeddingField.eyebrow") },
-            { id: "aloa-perturbation", label: t("perturbation.eyebrow") },
-            { id: "aloa-inference", label: t("inference.eyebrow") },
-            { id: "aloa-findings", label: t("charts.eyebrow") }
-          ]}
-        >
+        <StoryPageShell>
           <AloaHero
             id="aloa-hero"
             eyebrow={t("hero.eyebrow")}
@@ -63,41 +50,41 @@ export default async function AloaPage({ params }: PageProps) {
             ctaSecondary={t("hero.ctaSecondary")}
           />
 
-          <div id="aloa-story">
-            <TwoTowerScene
-              id="aloa-two-tower"
-              eyebrow={t("twoTower.eyebrow")}
-              title={t("twoTower.title")}
-              body={t("twoTower.body")}
-            />
-            <EmbeddingFieldScene
-              id="aloa-field"
-              eyebrow={t("embeddingField.eyebrow")}
-              title={t("embeddingField.title")}
-              body={t("embeddingField.body")}
-            />
-            <PerturbationScene
-              id="aloa-perturbation"
-              eyebrow={t("perturbation.eyebrow")}
-              title={t("perturbation.title")}
-              body={t("perturbation.body")}
-            />
-            <InferenceScene
-              id="aloa-inference"
-              eyebrow={t("inference.eyebrow")}
-              title={t("inference.title")}
-              body={t("inference.body")}
-            />
-            <ChartsScene
-              id="aloa-findings"
-              eyebrow={t("charts.eyebrow")}
-              title={t("charts.title")}
-              body={t("charts.body")}
-              metricsLabel={t("charts.metricsLabel")}
-              formulasLabel={t("charts.formulasLabel")}
-              paperLabel={t("charts.paperLabel")}
-            />
-          </div>
+          <AloaPinnedStory
+            id="aloa-story"
+            locale={locale}
+            twoTower={{
+              eyebrow: t("twoTower.eyebrow"),
+              title: t("twoTower.title"),
+              body: t("twoTower.body")
+            }}
+            embeddingField={{
+              eyebrow: t("embeddingField.eyebrow"),
+              title: t("embeddingField.title"),
+              body: t("embeddingField.body")
+            }}
+            perturbation={{
+              eyebrow: t("perturbation.eyebrow"),
+              title: t("perturbation.title"),
+              body: t("perturbation.body")
+            }}
+            inference={{
+              eyebrow: t("inference.eyebrow"),
+              title: t("inference.title"),
+              body: t("inference.body")
+            }}
+            charts={{
+              eyebrow: t("charts.eyebrow"),
+              title: t("charts.title"),
+              body: t("charts.body")
+            }}
+            metricsLabel={t("charts.metricsLabel")}
+            formulasLabel={t("charts.formulasLabel")}
+            paperCta={t("charts.paperCta")}
+            paperHref="https://arxiv.org/search/?query=membership+inference+two+tower&searchtype=all"
+            formulaLeft={t("charts.formulaLeft")}
+            formulaRight={t("charts.formulaRight")}
+          />
         </StoryPageShell>
 
         <Section id="aloa-notes">

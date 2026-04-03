@@ -2,14 +2,14 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import Container from "@/components/layout/Container";
-import Section from "@/components/layout/Section";
-import LocaleLink from "@/components/ui/LocaleLink";
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
+import Section from "@/components/layout/Section";
 import useHydratedReducedMotion from "@/components/motion/useHydratedReducedMotion";
 import MotionButtonWrap from "@/components/motion/MotionButtonWrap";
+import LocaleLink from "@/components/ui/LocaleLink";
 import { ensureGsapRegistered, gsap, ScrollTrigger } from "@/lib/animations/gsap";
-import headshotImage from "@/pic/headshot.jpg";
+import headshotImage from "@/pic/headshot_nbck.png";
 
 type HeroSectionProps = {
   eyebrow: string;
@@ -20,245 +20,274 @@ type HeroSectionProps = {
   ctaSecondary: string;
 };
 
+// TUNE: scroll distance for the pinned hero sequence - increase if chapters
+// feel rushed, decrease if sequence requires too much scrolling.
+const PIN_SCROLL_DISTANCE = 2000;
+
 export default function HeroSection({
-  eyebrow,
+  eyebrow: _eyebrow,
   name,
   title,
   intro,
   ctaPrimary,
   ctaSecondary
 }: HeroSectionProps) {
+  const t = useTranslations("HomePage");
   const reduceMotion = useHydratedReducedMotion();
+  const [showAllDesktopContent, setShowAllDesktopContent] = useState(false);
+
   const heroSectionRef = useRef<HTMLDivElement>(null);
-  const heroBlockRef = useRef<HTMLDivElement>(null);
   const heroGridRef = useRef<HTMLDivElement>(null);
-  const headshotWrapRef = useRef<HTMLDivElement>(null);
-  const headshotImageRef = useRef<HTMLImageElement>(null);
-  const statusBadgeRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const nameSubtitleRef = useRef<HTMLDivElement>(null);
+  const headshotWrapperRef = useRef<HTMLDivElement>(null);
+  const headshotRef = useRef<HTMLDivElement>(null);
+  const nameBlockRef = useRef<HTMLDivElement>(null);
+  const metricPanelsRef = useRef<HTMLDivElement>(null);
   const introRef = useRef<HTMLParagraphElement>(null);
+  const signalsRef = useRef<HTMLDivElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
-  const heroSidePanelRef = useRef<HTMLDivElement>(null);
-  const nameWords = name.split(" ");
-  const easeCurve = [0.22, 1, 0.36, 1] as const;
-  const lastNameWordStartDelay = Math.max(nameWords.length - 1, 0) * 0.08;
-  const subtitleDelay = reduceMotion ? 0 : lastNameWordStartDelay + 0.6 + 0.2;
-  const ctaDelay = reduceMotion ? 0 : subtitleDelay + 0.6 + 0.3;
-  const [enableTilt, setEnableTilt] = useState(false);
-  const telemetryTags = ["AI RESEARCH", "APPLIED MATH", "DEPLOYABLE SYSTEMS"];
+  const signalItemRefs = useRef<(HTMLParagraphElement | null)[]>([]);
 
   useEffect(() => {
-    if (reduceMotion) {
-      return;
-    }
-
-    const pointerQuery = window.matchMedia("(pointer: fine)");
-    const updateTiltAvailability = () => {
-      setEnableTilt(pointerQuery.matches);
+    const widthQuery = window.matchMedia("(max-width: 1023px)");
+    const updateRenderMode = () => {
+      const useFallbackLayout = widthQuery.matches;
+      setShowAllDesktopContent(useFallbackLayout || !!reduceMotion);
     };
 
-    updateTiltAvailability();
-    pointerQuery.addEventListener("change", updateTiltAvailability);
+    updateRenderMode();
+    widthQuery.addEventListener("change", updateRenderMode);
 
     return () => {
-      pointerQuery.removeEventListener("change", updateTiltAvailability);
+      widthQuery.removeEventListener("change", updateRenderMode);
     };
   }, [reduceMotion]);
 
   useEffect(() => {
     if (
-      reduceMotion ||
+      window.matchMedia("(max-width: 1023px)").matches ||
       !heroSectionRef.current ||
-      !heroSidePanelRef.current ||
-      window.matchMedia("(hover: none)").matches
+      !headshotRef.current ||
+      !metricPanelsRef.current ||
+      !introRef.current ||
+      !ctaRef.current
     ) {
       return;
     }
 
     ensureGsapRegistered();
 
-    const tween = gsap.to(heroSidePanelRef.current, {
-      y: -40,
-      rotate: 3,
-      ease: "none",
-      scrollTrigger: {
+    const ctx = gsap.context(() => {
+      gsap.set(metricPanelsRef.current, { opacity: 0, y: 30 });
+      gsap.set(introRef.current, { opacity: 0, y: 16 });
+      gsap.set(signalsRef.current, { opacity: 0 });
+      gsap.set(signalItemRefs.current.filter(Boolean), { opacity: 0, y: 20 });
+      gsap.set(ctaRef.current, { opacity: 0, scale: 0.97 });
+      gsap.set(headshotRef.current, { scale: 1, y: 0, opacity: 1 });
+
+      const tl = gsap.timeline({ paused: true });
+
+      tl.to(
+        metricPanelsRef.current,
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.25,
+          ease: "power2.out"
+        },
+        0
+      );
+
+      tl.to(
+        headshotRef.current,
+        {
+          scale: 1.04,
+          duration: 0.25,
+          ease: "none"
+        },
+        0
+      );
+
+      tl.to(
+        introRef.current,
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.2,
+          ease: "power2.out"
+        },
+        0.3
+      );
+
+      tl.to(
+        headshotRef.current,
+        {
+          y: -18,
+          duration: 0.2,
+          ease: "none"
+        },
+        0.3
+      );
+
+      tl.to(
+        signalsRef.current,
+        {
+          opacity: 1,
+          duration: 0.15,
+          ease: "power2.out"
+        },
+        0.55
+      );
+
+      tl.to(
+        signalItemRefs.current.filter(Boolean),
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.15,
+          stagger: 0.08,
+          ease: "power2.out"
+        },
+        0.55
+      );
+
+      tl.to(
+        headshotRef.current,
+        {
+          opacity: 0.88,
+          duration: 0.15,
+          ease: "none"
+        },
+        0.55
+      );
+
+      tl.to(
+        ctaRef.current,
+        {
+          opacity: 1,
+          scale: 1,
+          duration: 0.15,
+          ease: "power2.out"
+        },
+        0.82
+      );
+
+      tl.to(
+        headshotRef.current,
+        {
+          opacity: 1,
+          duration: 0.1,
+          ease: "none"
+        },
+        0.82
+      );
+
+      ScrollTrigger.create({
         trigger: heroSectionRef.current,
         start: "top top",
-        end: "+=150%",
-        scrub: 2,
+        end: `+=${PIN_SCROLL_DISTANCE}`,
+        pin: true,
+        pinSpacing: true,
+        scrub: 1,
+        anticipatePin: 1,
+        animation: tl,
         invalidateOnRefresh: true
-      }
+      });
+    }, heroSectionRef);
+
+    const rafId = requestAnimationFrame(() => {
+      ScrollTrigger.refresh();
     });
 
     return () => {
-      tween.scrollTrigger?.kill();
-      tween.kill();
+      cancelAnimationFrame(rafId);
+      ctx.revert();
     };
-  }, [reduceMotion]);
+  }, []);
 
   useEffect(() => {
     if (
-      reduceMotion ||
+      window.matchMedia("(max-width: 1023px)").matches ||
       !heroSectionRef.current ||
-      window.matchMedia("(hover: none)").matches
+      !headshotRef.current
     ) {
       return;
     }
 
     ensureGsapRegistered();
 
-    const layerTargets = [
-      { element: heroGridRef.current, y: -10 },
-      { element: headshotWrapRef.current, y: -40 },
-      { element: statusBadgeRefs.current[0], y: -25 },
-      { element: statusBadgeRefs.current[1], y: -30 },
-      { element: statusBadgeRefs.current[2], y: -20 },
-      { element: nameSubtitleRef.current, y: -20 },
-      { element: introRef.current, y: -15 },
-      { element: ctaRef.current, y: -10 }
-    ].filter((layer) => layer.element !== null);
+    const ctx = gsap.context(() => {
+      const overlayTargets = [
+        nameBlockRef.current,
+        metricPanelsRef.current,
+        introRef.current,
+        signalsRef.current,
+        ctaRef.current
+      ].filter(Boolean);
 
-    const tweens = layerTargets.map(({ element, y }) =>
-      gsap.to(element, {
-        y,
+      gsap.to(headshotRef.current, {
+        y: -80,
         ease: "none",
         scrollTrigger: {
           trigger: heroSectionRef.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: 1,
-          invalidateOnRefresh: true
-        }
-      })
-    );
-
-    return () => {
-      tweens.forEach((tween) => {
-        tween.scrollTrigger?.kill();
-        tween.kill();
-      });
-    };
-  }, [reduceMotion]);
-
-  useEffect(() => {
-    if (
-      reduceMotion ||
-      !heroSectionRef.current ||
-      !headshotImageRef.current ||
-      window.matchMedia("(hover: none)").matches
-    ) {
-      return;
-    }
-
-    ensureGsapRegistered();
-
-    const tween = gsap.fromTo(
-      headshotImageRef.current,
-      {
-        scale: 1.08,
-        clipPath: "inset(0 0 0% 0)"
-      },
-      {
-        scale: 1,
-        clipPath: "inset(0 0 25% 0)",
-        ease: "none",
-        scrollTrigger: {
-          trigger: heroSectionRef.current,
-          start: "top top",
+          start: "bottom bottom",
           end: "bottom top",
           scrub: 1.5,
           invalidateOnRefresh: true
         }
+      });
+
+      if (overlayTargets.length) {
+        gsap.to(overlayTargets, {
+          opacity: 0,
+          y: -24,
+          ease: "none",
+          scrollTrigger: {
+            trigger: heroSectionRef.current,
+            start: "bottom bottom",
+            end: "bottom top",
+            scrub: 1,
+            invalidateOnRefresh: true
+          }
+        });
       }
-    );
+    }, heroSectionRef);
+
+    const rafId = requestAnimationFrame(() => {
+      ScrollTrigger.refresh();
+    });
 
     return () => {
-      tween.scrollTrigger?.kill();
-      tween.kill();
+      cancelAnimationFrame(rafId);
+      ctx.revert();
     };
-  }, [reduceMotion]);
+  }, []);
 
-  const handlePointerMove = (event: React.MouseEvent<HTMLDivElement>) => {
-    if (!enableTilt || !heroBlockRef.current) {
-      return;
+  const metricItems = [
+    {
+      label: t("heroMetrics.modeLabel"),
+      value: t("heroMetrics.modeValue")
+    },
+    {
+      label: t("heroMetrics.statusLabel"),
+      value: t("heroMetrics.statusValue")
+    },
+    {
+      label: t("heroMetrics.surfaceLabel"),
+      value: t("heroMetrics.surfaceValue")
     }
+  ];
 
-    const rect = heroBlockRef.current.getBoundingClientRect();
-    const x = (event.clientX - rect.left) / rect.width;
-    const y = (event.clientY - rect.top) / rect.height;
-    const rotateY = (x - 0.5) * 4;
-    const rotateX = (0.5 - y) * 4;
-
-    heroBlockRef.current.style.setProperty("--hero-rotate-x", `${rotateX.toFixed(2)}deg`);
-    heroBlockRef.current.style.setProperty("--hero-rotate-y", `${rotateY.toFixed(2)}deg`);
-  };
-
-  const resetTilt = () => {
-    if (!heroBlockRef.current) {
-      return;
-    }
-
-    heroBlockRef.current.style.setProperty("--hero-rotate-x", "0deg");
-    heroBlockRef.current.style.setProperty("--hero-rotate-y", "0deg");
-  };
-
-  const sectionVariants = reduceMotion
-    ? {
-        hidden: {},
-        visible: {
-          transition: {
-            staggerChildren: 0
-          }
-        }
-      }
-    : {
-        hidden: {},
-        visible: {
-          transition: {
-            staggerChildren: 0.08
-          }
-        }
-      };
-
-  const nameGroupVariants = reduceMotion
-    ? {
-        hidden: {},
-        visible: {
-          transition: {
-            staggerChildren: 0
-          }
-        }
-      }
-    : {
-        hidden: {},
-        visible: {
-          transition: {
-            staggerChildren: 0.08
-          }
-        }
-      };
-
-  const nameWordVariants = reduceMotion
-    ? {
-        hidden: {},
-        visible: { opacity: 1 }
-      }
-    : {
-        hidden: { opacity: 0, y: 24 },
-        visible: {
-          opacity: 1,
-          y: 0,
-          transition: {
-            duration: 0.6,
-            ease: easeCurve
-          }
-        }
-      };
+  const signalItems = [
+    t("accomplishmentsItems.one"),
+    t("accomplishmentsItems.two"),
+    t("accomplishmentsItems.three")
+  ];
 
   return (
-    <Section className="relative flex min-h-screen items-center overflow-hidden hairline-grid">
-      <div ref={heroSectionRef} className="w-full">
-        <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+    <div ref={heroSectionRef} className="-mt-[102px] h-[calc(100vh+102px)]">
+      <Section className="relative h-full overflow-hidden hairline-grid pt-0 pb-0">
+        <div className="relative h-full w-full">
+        <div className="pointer-events-none absolute inset-0 z-[-1] overflow-hidden">
           <motion.div
             className="absolute inset-0 origin-center"
             animate={reduceMotion ? undefined : { scale: [0.97, 1.03, 0.97] }}
@@ -299,217 +328,87 @@ export default function HeroSection({
           </motion.div>
         </div>
 
-        <Container wide>
-          <motion.div
-            ref={heroBlockRef}
-            className="grid items-end gap-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(20rem,0.9fr)]"
-            initial="hidden"
-            animate="visible"
-            variants={sectionVariants}
-            style={
-              enableTilt
-                ? {
-                    transform:
-                      "perspective(800px) rotateX(var(--hero-rotate-x, 0deg)) rotateY(var(--hero-rotate-y, 0deg))",
-                    transformStyle: "preserve-3d",
-                    transition: "transform 160ms ease-out"
-                  }
-                : undefined
-            }
-            onMouseMove={handlePointerMove}
-            onMouseLeave={resetTilt}
-          >
-            <div className="max-w-5xl">
-            <motion.p
-              className="section-label"
-              initial={reduceMotion ? false : { opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                duration: reduceMotion ? 0 : 0.6,
-                ease: easeCurve
-              }}
-            >
-              {eyebrow}
-            </motion.p>
-
-            <motion.div
-              className="mt-6 flex flex-wrap gap-3"
-              initial={reduceMotion ? false : { opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                duration: reduceMotion ? 0 : 0.5,
-                delay: reduceMotion ? 0 : 0.12,
-                ease: easeCurve
-              }}
-            >
-              {telemetryTags.map((tag) => (
-                <span key={tag} className="glass-badge">
-                  {tag}
-                </span>
-              ))}
-            </motion.div>
-
-            <div ref={nameSubtitleRef} className="will-change-transform">
-              <h1 className="display-title mt-8 max-w-5xl">
-                <motion.span
-                  className="silver-text"
-                  initial="hidden"
-                  animate="visible"
-                  variants={nameGroupVariants}
-                >
-                  {nameWords.map((word, index) => (
-                    <motion.span
-                      key={`${word}-${index}`}
-                      className="inline-block"
-                      variants={nameWordVariants}
-                    >
-                      {word}
-                      {index < nameWords.length - 1 ? "\u00A0" : ""}
-                    </motion.span>
-                  ))}
-                </motion.span>
-              </h1>
-
-              <motion.h2
-                className="headline-lg mt-8 max-w-3xl text-[var(--color-text-soft)]"
-                initial={reduceMotion ? false : { opacity: 0, y: 18 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{
-                  duration: reduceMotion ? 0 : 0.6,
-                  delay: subtitleDelay,
-                  ease: easeCurve
-                }}
-              >
-                {title}
-              </motion.h2>
-            </div>
-
-            <motion.p
-              ref={introRef}
-              className="body-lg mt-8 max-w-2xl"
-              initial={reduceMotion ? false : { opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              style={{ willChange: "transform" }}
-              transition={{
-                duration: reduceMotion ? 0 : 0.6,
-                delay: reduceMotion ? 0 : 0.28 + lastNameWordStartDelay,
-                ease: easeCurve
-              }}
-            >
-              {intro}
-            </motion.p>
-
-            <motion.div
-              ref={ctaRef}
-              className="mt-10 flex flex-wrap gap-4"
-              initial={reduceMotion ? false : { opacity: 0, scale: 0.96 }}
-              animate={{ opacity: 1, scale: 1 }}
-              style={{ willChange: "transform" }}
-              transition={{
-                duration: reduceMotion ? 0 : 0.45,
-                delay: ctaDelay,
-                ease: easeCurve
-              }}
-            >
-              <MotionButtonWrap>
-                <LocaleLink href="/projects" className="btn-primary">
-                  {ctaPrimary}
-                </LocaleLink>
-              </MotionButtonWrap>
-
-              <MotionButtonWrap>
-                <LocaleLink href="/contact" className="btn-secondary">
-                  {ctaSecondary}
-                </LocaleLink>
-              </MotionButtonWrap>
-            </motion.div>
-
-            <motion.div
-              className="mt-10 grid gap-4 sm:grid-cols-3"
-              initial={reduceMotion ? false : { opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                duration: reduceMotion ? 0 : 0.5,
-                delay: reduceMotion ? 0 : ctaDelay + 0.08,
-                ease: easeCurve
-              }}
-              >
-              <div
-                ref={(node) => {
-                  statusBadgeRefs.current[0] = node;
-                }}
-                className="hero-metric-panel will-change-transform"
-              >
-                <span className="hero-metric-label">MODE</span>
-                <span className="hero-metric-value">RESEARCH</span>
-              </div>
-              <div
-                ref={(node) => {
-                  statusBadgeRefs.current[1] = node;
-                }}
-                className="hero-metric-panel will-change-transform"
-              >
-                <span className="hero-metric-label">STATUS</span>
-                <span className="hero-metric-value">BUILDING</span>
-              </div>
-              <div
-                ref={(node) => {
-                  statusBadgeRefs.current[2] = node;
-                }}
-                className="hero-metric-panel will-change-transform"
-              >
-                <span className="hero-metric-label">SURFACE</span>
-                <span className="hero-metric-value">DEPLOYABLE AI</span>
-              </div>
-            </motion.div>
+        <div ref={headshotWrapperRef} className="absolute inset-0 z-0">
+          <div ref={headshotRef} className="absolute inset-0 will-change-transform">
+            <Image
+              src={headshotImage}
+              alt={`${name} portrait`}
+              priority
+              placeholder="empty"
+              fill
+              className="object-contain object-center"
+              sizes="100vw"
+            />
           </div>
+        </div>
 
-            <motion.div
-              className="hero-portrait-shell"
-              initial={reduceMotion ? false : { opacity: 0, x: 28 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{
-                duration: reduceMotion ? 0 : 0.7,
-                delay: reduceMotion ? 0 : subtitleDelay + 0.04,
-                ease: easeCurve
+        <div ref={nameBlockRef} className="absolute bottom-[20%] left-8 z-10 max-w-5xl lg:left-16">
+          <h1 className="display-title max-w-5xl pb-[0.14em] silver-text">{name}</h1>
+          <h2 className="headline-lg mt-8 max-w-3xl text-[var(--color-text-soft)]">{title}</h2>
+        </div>
+
+        <div
+          ref={metricPanelsRef}
+          className={`absolute bottom-[8%] left-8 z-10 grid gap-4 sm:grid-cols-3 lg:left-16 ${
+            showAllDesktopContent ? "" : "lg:opacity-0"
+          }`}
+        >
+          {metricItems.map((item) => (
+            <div key={item.label} className="hero-metric-panel">
+              <span className="hero-metric-label">{item.label}</span>
+              <span className="hero-metric-value">{item.value}</span>
+            </div>
+          ))}
+        </div>
+
+        <p
+          ref={introRef}
+          className={`body-lg absolute top-[26%] left-4 z-10 max-w-sm lg:left-8 ${
+            showAllDesktopContent ? "" : "lg:opacity-0"
+          }`}
+        >
+          {intro}
+        </p>
+
+        <div
+          ref={signalsRef}
+          className={`absolute top-[26%] right-4 z-10 flex max-w-[18rem] flex-col gap-4 lg:right-8 ${
+            showAllDesktopContent ? "" : "lg:opacity-0"
+          }`}
+        >
+          {signalItems.map((item, index) => (
+            <p
+              key={item}
+              ref={(node) => {
+                signalItemRefs.current[index] = node;
               }}
+              className="body-md"
             >
-              <div className="hero-portrait-frame">
-                <div className="hero-portrait-grid" />
-                <div
-                  ref={headshotWrapRef}
-                  className="hero-portrait-image-wrap will-change-transform"
-                >
-                  <Image
-                    ref={headshotImageRef}
-                    src={headshotImage}
-                    alt={`${name} headshot`}
-                    priority
-                    placeholder="blur"
-                    className="hero-portrait-image will-change-transform"
-                    sizes="(min-width: 1024px) 34vw, 90vw"
-                  />
-                </div>
-              </div>
+              {item}
+            </p>
+          ))}
+        </div>
 
-              <div className="mt-4">
-                <div
-                  ref={heroSidePanelRef}
-                  className="hero-side-panel will-change-transform"
-                >
-                  <div className="flex items-center justify-between gap-3">
-                    <span className="hero-metric-label">PROFILE</span>
-                    <span className="pulse-indicator" aria-hidden="true" />
-                  </div>
-                  <p className="hero-side-copy mt-3">
-                    Technical depth, mathematical rigor, and real-world deployment.
-                  </p>
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
-        </Container>
-      </div>
-    </Section>
+        <div
+          ref={ctaRef}
+          className={`absolute right-8 bottom-[8%] z-10 flex gap-4 lg:right-16 ${
+            showAllDesktopContent ? "" : "lg:opacity-0"
+          }`}
+        >
+          <MotionButtonWrap>
+            <LocaleLink href="/projects" className="btn-primary">
+              {ctaPrimary}
+            </LocaleLink>
+          </MotionButtonWrap>
+
+          <MotionButtonWrap>
+            <LocaleLink href="/contact" className="btn-secondary">
+              {ctaSecondary}
+            </LocaleLink>
+          </MotionButtonWrap>
+        </div>
+        </div>
+      </Section>
+    </div>
   );
 }
