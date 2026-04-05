@@ -294,7 +294,6 @@ export default function HeroSection({
       }}
     >
       <Section className="relative h-full overflow-hidden hairline-grid pt-0 pb-0">
-        <div className="relative h-full w-full">
         <div className="pointer-events-none absolute inset-0 z-[-1] overflow-hidden">
           <motion.div
             className="absolute inset-0 origin-center"
@@ -336,86 +335,138 @@ export default function HeroSection({
           </motion.div>
         </div>
 
-        <div ref={headshotWrapperRef} className="absolute inset-0 z-0">
-          <div ref={headshotRef} className="absolute inset-0 will-change-transform">
-            <Image
-              src={headshotImage}
-              alt={`${name} portrait`}
-              priority
-              placeholder="empty"
-              fill
-              className="object-contain object-center"
-              sizes="100vw"
-            />
-          </div>
-        </div>
-
-        <div ref={nameBlockRef} className="absolute bottom-[20%] left-8 z-10 max-w-5xl lg:left-16">
-          <h1 className="display-title max-w-5xl pb-[0.14em] silver-text">{name}</h1>
-          <h2 className="headline-lg mt-8 max-w-3xl text-[var(--color-text-soft)]">{title}</h2>
-        </div>
-
-        <div
-          ref={metricPanelsRef}
-          className={`absolute bottom-[8%] left-8 z-10 grid gap-4 sm:grid-cols-3 lg:left-16 ${
-            showAllDesktopContent ? "" : "lg:opacity-0"
-          }`}
-        >
-          {metricItems.map((item) => (
-            <div key={item.label} className="hero-metric-panel">
-              <span className="hero-metric-label">{item.label}</span>
-              <span className="hero-metric-value">{item.value}</span>
+        {!showAllDesktopContent && (
+          <div className="relative h-full w-full">
+            <div ref={headshotWrapperRef} className="absolute inset-0 z-0">
+              <div ref={headshotRef} className="absolute inset-0 will-change-transform">
+                <Image
+                  src={headshotImage}
+                  alt={`${name} portrait`}
+                  priority
+                  placeholder="empty"
+                  fill
+                  className="object-contain object-center"
+                  sizes="100vw"
+                />
+              </div>
             </div>
-          ))}
-        </div>
 
-        <p
-          ref={introRef}
-          className={`body-lg absolute top-[26%] left-4 z-10 max-w-sm lg:left-auto lg:right-[calc(50%+15rem)] ${
-            showAllDesktopContent ? "" : "lg:opacity-0"
-          }`}
-        >
-          {intro}
-        </p>
-
-        <div
-          ref={signalsRef}
-          className={`absolute top-[26%] right-4 z-10 flex max-w-[18rem] flex-col gap-4 lg:right-auto lg:left-[calc(50%+18rem)] ${
-            showAllDesktopContent ? "" : "lg:opacity-0"
-          }`}
-        >
-          {signalItems.map((item, index) => (
-            <p
-              key={item}
-              ref={(node) => {
-                signalItemRefs.current[index] = node;
-              }}
-              className="body-md"
+            <div
+              ref={nameBlockRef}
+              className="absolute bottom-[20%] left-8 z-10 max-w-5xl lg:left-16"
             >
-              {item}
+              <h1 className="display-title max-w-5xl pb-[0.14em] silver-text">{name}</h1>
+              <h2 className="headline-lg mt-8 max-w-3xl text-[var(--color-text-soft)]">{title}</h2>
+            </div>
+
+            <div
+              ref={metricPanelsRef}
+              className={`absolute bottom-[8%] left-8 z-10 grid gap-4 sm:grid-cols-3 lg:left-16 ${
+                showAllDesktopContent ? "" : "lg:opacity-0"
+              }`}
+            >
+              {metricItems.map((item) => (
+                <div key={item.label} className="hero-metric-panel">
+                  <span className="hero-metric-label">{item.label}</span>
+                  <span className="hero-metric-value">{item.value}</span>
+                </div>
+              ))}
+            </div>
+
+            <p
+              ref={introRef}
+              className={`body-lg absolute top-[26%] left-4 z-10 max-w-sm lg:left-auto lg:right-[calc(50%+15rem)] ${
+                showAllDesktopContent ? "" : "lg:opacity-0"
+              }`}
+            >
+              {intro}
             </p>
-          ))}
-        </div>
 
-        <div
-          ref={ctaRef}
-          className={`absolute right-8 bottom-[8%] z-10 flex gap-4 lg:right-16 ${
-            showAllDesktopContent ? "" : "lg:opacity-0"
-          }`}
-        >
-          <MotionButtonWrap>
-            <LocaleLink href="/projects" className="btn-primary">
-              {ctaPrimary}
-            </LocaleLink>
-          </MotionButtonWrap>
+            <div
+              ref={signalsRef}
+              className={`absolute top-[26%] right-4 z-10 flex max-w-[18rem] flex-col gap-4 lg:right-auto lg:left-[calc(50%+18rem)] ${
+                showAllDesktopContent ? "" : "lg:opacity-0"
+              }`}
+            >
+              {signalItems.map((item, index) => (
+                <p
+                  key={item}
+                  ref={(node) => {
+                    signalItemRefs.current[index] = node;
+                  }}
+                  className="body-md"
+                >
+                  {item}
+                </p>
+              ))}
+            </div>
 
-          <MotionButtonWrap>
-            <LocaleLink href="/contact" className="btn-secondary">
-              {ctaSecondary}
-            </LocaleLink>
-          </MotionButtonWrap>
-        </div>
-        </div>
+            <div
+              ref={ctaRef}
+              className={`absolute right-8 bottom-[8%] z-10 flex gap-4 lg:right-16 ${
+                showAllDesktopContent ? "" : "lg:opacity-0"
+              }`}
+            >
+              <MotionButtonWrap>
+                <LocaleLink href="/projects" className="btn-primary">
+                  {ctaPrimary}
+                </LocaleLink>
+              </MotionButtonWrap>
+
+              <MotionButtonWrap>
+                <LocaleLink href="/contact" className="btn-secondary">
+                  {ctaSecondary}
+                </LocaleLink>
+              </MotionButtonWrap>
+            </div>
+          </div>
+        )}
+
+        {showAllDesktopContent && (
+          <div className="flex min-h-screen flex-col gap-6 px-8 pb-16 pt-[calc(var(--header-height,80px)+2rem)]">
+            <div className="relative mx-auto w-full max-w-xs">
+              <Image
+                src={headshotImage}
+                alt={`${name} portrait`}
+                priority
+                placeholder="empty"
+                width={400}
+                height={500}
+                className="h-auto w-full object-contain"
+              />
+            </div>
+            <h1 className="display-title silver-text">{name}</h1>
+            <h2 className="headline-lg text-[var(--color-text-soft)]">{title}</h2>
+            <p className="body-lg max-w-prose">{intro}</p>
+            <div className="flex w-full flex-col gap-3">
+              {signalItems.map((item) => (
+                <p key={item} className="body-md border-l border-[var(--color-accent)] pl-4">
+                  {item}
+                </p>
+              ))}
+            </div>
+            <div className="grid w-full gap-3 sm:grid-cols-3">
+              {metricItems.map((item) => (
+                <div key={item.label} className="hero-metric-panel">
+                  <span className="hero-metric-label">{item.label}</span>
+                  <span className="hero-metric-value">{item.value}</span>
+                </div>
+              ))}
+            </div>
+            <div className="flex flex-wrap gap-4">
+              <MotionButtonWrap>
+                <LocaleLink href="/projects" className="btn-primary">
+                  {ctaPrimary}
+                </LocaleLink>
+              </MotionButtonWrap>
+              <MotionButtonWrap>
+                <LocaleLink href="/contact" className="btn-secondary">
+                  {ctaSecondary}
+                </LocaleLink>
+              </MotionButtonWrap>
+            </div>
+          </div>
+        )}
       </Section>
     </div>
   );

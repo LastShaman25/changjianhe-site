@@ -60,6 +60,9 @@ export default function StoryPin({
       );
 
       if (chapterElements.length !== chapters.length) {
+        console.warn(
+          `StoryPin: expected ${chapters.length} chapters, found ${chapterElements.length} in DOM`
+        );
         return;
       }
 
