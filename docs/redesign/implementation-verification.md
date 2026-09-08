@@ -67,3 +67,6 @@ Replaced the invented slope activity with a source-based privacy/profile/tutor f
 - Fresh production build with VERCEL=1 completed successfully, including TypeScript. ESLint: zero errors, five existing unused-variable warnings in older components.
 - Git ignore checks confirm dependencies, private local env files, generated outputs and local archives are excluded; .env.example is eligible for Git.
 - No GitHub push, Vercel account linking, or live deployment performed. The user will push and connect/confirm the repository in Vercel.
+
+## Always-on motion — 2026-09-07
+Removed the shared motion toggle and obsolete hidden homepage review controls. Homepage and project animations now always initialize, ignoring old URL/session/OS preferences. Production build and targeted ESLint passed; browser confirmed motion-ready/motion-active with ?motion=off, zero toggle elements, and no console errors. Local preview: port 3004.

@@ -14,5 +14,5 @@ export default function HomeExperience({ children, locale }: {
     const root = useRef<HTMLDivElement>(null);
     useGSAP((_context, contextSafe) => { if (root.current && contextSafe)
         return mountHomeMotion(root.current, contextSafe, (text: string) => locale === 'zh' ? homeCopy[text] ?? text : text); }, { scope: root, dependencies: [locale], revertOnUpdate: true });
-    return <div ref={root} lang={locale} className="portfolio-home still"><div className="reviewbar"><span id="motion-status" role="status"/><button type="button" id="motion-replay">{locale === 'zh' ? '播放动画' : 'Play motion'}</button><button type="button" id="motion-toggle" aria-pressed="false">{locale === 'zh' ? '动态效果' : 'Motion'}</button></div><div className="global-progress" id="global-progress"/>{children}</div>;
+    return <div ref={root} lang={locale} className="portfolio-home still"><div className="global-progress" id="global-progress"/>{children}</div>;
 }

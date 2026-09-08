@@ -1,4 +1,3 @@
-import {siteMotionEnabled} from './useSiteMotion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 export function mountHomeMotion(root, contextSafe, copy) {
@@ -7,19 +6,12 @@ export function mountHomeMotion(root, contextSafe, copy) {
     const listeners = [];
     const listen = (target, event, handler, options) => { const safe = contextSafe(handler); target.addEventListener(event, safe, options); listeners.push(() => target.removeEventListener(event, safe, options)); };
     const chapters = [...root.querySelectorAll('.chapter')], nav = [...root.querySelectorAll('.rail a')], progress = byId('global-progress');
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const requested = new URLSearchParams(location.search).get('motion');
-    let saved = null;
-    try {
-        saved = sessionStorage.getItem('cj-site-motion');
-    }
-    catch { }
-    let preference = requested === 'on' || requested === 'off' ? requested : saved;
-    let still = preference ? preference === 'off' : reduced.matches, queued = false, cap = 'similarity', research = 0, researchManual = false, studioManual = false;
+    const still = false;
+    let queued = false, cap = 'similarity', research = 0, researchManual = false, studioManual = false;
     const engineReady = true;
     if (engineReady)
         gsap.registerPlugin(ScrollTrigger);
-    let motionContext = null, layoutMedia = null, opening = null, playingDemo = null;
+    let motionContext = null, layoutMedia = null, opening = null;
     const clamp = (n) => Math.max(0, Math.min(1, n));
     const ns = 'http://www.w3.org/2000/svg', particles = byId('element-particles'), dots = [];
     particles.replaceChildren();
@@ -104,24 +96,6 @@ export function mountHomeMotion(root, contextSafe, copy) {
         queued = true;
         (frame = requestAnimationFrame(updateChrome));
     } }
-    function savePreference(value) {
-        preference = value;
-        try {
-            sessionStorage.setItem('cj-site-motion', value);
-        }
-        catch { }
-        const url = new URL(location.href);
-        url.searchParams.set('motion', value);
-        history.replaceState(null, '', url);
-    }
-    function cancelDemo() {
-        if (playingDemo) {
-            playingDemo.kill();
-            playingDemo = null;
-        }
-        byId('motion-replay').textContent = 'Play a scroll demo';
-        document.documentElement.classList.remove('demo-playing');
-    }
     function replayEntrance() {
         if (still || !engineReady)
             return;
@@ -134,7 +108,7 @@ export function mountHomeMotion(root, contextSafe, copy) {
             .fromTo('.hero-intro,.hero-actions', { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: .8, stagger: .1 }, .7);
     }
     function buildMotion() {
-        cancelDemo();
+        
         if (engineReady)
             gsap.killTweensOf('#results .barfill');
         if (opening) {
@@ -151,9 +125,6 @@ export function mountHomeMotion(root, contextSafe, copy) {
         }
         root.classList.toggle('still', still);
         root.classList.toggle('motion-active', !still && engineReady);
-        byId('motion-toggle').textContent = copy(still ? 'Motion: OFF' : 'Motion: ON');
-        byId('motion-toggle').setAttribute('aria-pressed', String(!still));
-        byId('motion-status').textContent = engineReady ? (still ? 'Static preview' : 'Scroll effects enabled') : 'Motion scripts unavailable';
         root.querySelectorAll('.chapter').forEach(el => el.style.setProperty('--p', '0'));
         paintParticles(1);
         researchManual = false;
@@ -230,58 +201,19 @@ export function mountHomeMotion(root, contextSafe, copy) {
         ScrollTrigger.refresh();
         updateChrome();
     }
-    listen(byId('motion-toggle'), 'click', () => {
-        still = !still;
-        savePreference(still ? 'off' : 'on');
-        buildMotion();
-    });
-    listen(byId('motion-replay'), 'click', () => {
-        if (playingDemo) {
-            cancelDemo();
-            return;
-        }
-        still = false;
-        savePreference('on');
-        buildMotion();
-        document.documentElement.classList.add('demo-playing');
-        window.scrollTo({ top: 0, behavior: 'instant' });
-        researchManual = false;
-        studioManual = false;
-        const state = { y: 0 };
-        const rentalChapter = byId('rental');
-        const destination = innerWidth > 850 ? rentalChapter.offsetTop + rentalChapter.offsetHeight - innerHeight - 56 : rentalChapter.offsetTop + rentalChapter.offsetHeight - innerHeight * .45;
-        byId('motion-replay').textContent = 'Stop demo';
-        playingDemo = gsap.timeline({ onComplete: cancelDemo })
-            .to(state, { y: byId('intro').offsetHeight - innerHeight, duration: 9, ease: 'power1.inOut', onUpdate: () => window.scrollTo({ top: state.y, behavior: 'instant' }) }, 2)
-            .to(state, { y: destination, duration: 12, ease: 'power1.inOut', onUpdate: () => window.scrollTo({ top: state.y, behavior: 'instant' }) }, 13)
-            .to({ hold: 0 }, { hold: 1, duration: 3 });
-    });
-    // Wheel/touch/keyboard navigation always takes control back immediately.
-    listen(window, 'wheel', cancelDemo, { passive: true });
-    listen(window, 'touchstart', cancelDemo, { passive: true });
-    listen(window, 'keydown', e => { if (['ArrowDown', 'ArrowUp', 'PageDown', 'PageUp', 'Home', 'End', 'Escape', ' '].includes(e.key))
-        cancelDemo(); });
-    nav.forEach(a => listen(a, 'click', cancelDemo));
     listen(window, 'scroll', requestRender, { passive: true });
     listen(window, 'resize', requestRender);
-    listen(window,'cj-motion-change',()=>{still=!siteMotionEnabled();preference=still?'off':'on';buildMotion();});
-    listen(reduced, 'change', () => { if (!preference) {
-        still = reduced.matches;
-        buildMotion();
-    } });
     listen(document, 'visibilitychange', () => { if (document.hidden) {
-        cancelDemo();
+        
         if (opening)
             opening.pause();
     }
     else if (opening && !still) {
         opening.play();
     } });
-    if (requested === 'on' || requested === 'off')
-        savePreference(requested);
     root.classList.add('motion-ready');
     setStudio(0);
     setResearch(0);
     buildMotion();
-    return () => { root.classList.remove('motion-ready'); cancelDemo(); opening?.kill(); layoutMedia?.revert(); motionContext?.revert(); cancelAnimationFrame(frame); listeners.forEach(fn => fn()); particles.replaceChildren(); embed.replaceChildren(); };
+    return () => { root.classList.remove('motion-ready');  opening?.kill(); layoutMedia?.revert(); motionContext?.revert(); cancelAnimationFrame(frame); listeners.forEach(fn => fn()); particles.replaceChildren(); embed.replaceChildren(); };
 }

@@ -58,4 +58,4 @@ npm run lint
 npm run build
 ```
 
-`npm run typecheck` is also available after Next.js has generated route types. The production build includes TypeScript checking. Preview deployments should be checked in both `/en` and `/zh`, with motion on/off and a mobile viewport.
+`npm run typecheck` is also available after Next.js has generated route types. The production build includes TypeScript checking. Preview deployments should be checked in both `/en` and `/zh`, with automatic motion and a mobile viewport.
