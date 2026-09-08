@@ -64,3 +64,17 @@
 @media(min-width:600px){.mobile-hero,.mobile-chapter,.mobile-closing{padding-left:max(30px,calc((100% - 600px)/2));padding-right:max(30px,calc((100% - 600px)/2))}.mobile-portrait{height:330px}}
 @media(max-width:360px){.mobile-story-card{padding:13px}.mobile-art{height:148px}.mobile-story-copy{min-height:154px}.mobile-story-copy h3{font-size:20px!important}.mobile-story-top{font-size:9px}.mobile-chapter{padding-left:16px;padding-right:16px}.mobile-hero{padding-left:20px;padding-right:20px}.mobile-portrait{height:240px}}
 @media(max-height:560px){.mobile-art{height:150px}.mobile-story-copy{min-height:100px}}
+
+/* Keep the chapter title and visualization in the same sticky surface. */
+.mobile-chapter{padding-top:16px;padding-bottom:24px}
+.mobile-story-top{align-items:center;min-height:28px}
+.mobile-chapter .mobile-story-top h2{font-size:clamp(13px,3.8vw,19px);line-height:1.3;letter-spacing:-.02em;white-space:nowrap;margin:0;font-weight:500}
+.mobile-story-top h2 small{font-size:10px;color:#b6b6aa;letter-spacing:0}
+.mobile-story-copy{min-height:122px}
+.mobile-story-note{margin-top:10px;min-height:14px}
+.mobile-art{overflow:hidden}
+@media(max-width:360px){.mobile-story-copy{min-height:140px}.mobile-chapter .mobile-story-top h2{font-size:13px}}
+
+.mobile-story{overflow-anchor:none}
+.mobile-story-copy{min-height:134px}
+@media(max-width:360px){.mobile-story-copy{min-height:156px}}

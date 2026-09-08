@@ -8,13 +8,16 @@ export function useMobileStory(count:number,stepDistance=280){
  const travel=useRef(0),sticky=useRef(false);
  useEffect(()=>{
   const host=track.current!,panel=card.current!;let frame=0,disposed=false;
+  let available=window.visualViewport?.height??innerHeight;
   const measure=()=>{
    const wasSticky=sticky.current;
-   const available=window.visualViewport?.height??innerHeight;
-   sticky.current=panel.offsetHeight+84<=available;
+   // Reserve fallback controls when measuring to avoid a pin/unpin resize loop.
+   const controls=panel.querySelector<HTMLElement>('.mobile-story-controls');
+   const contentHeight=panel.offsetHeight-(controls?controls.offsetHeight+22:0);
+   sticky.current=contentHeight+84<=available;
    travel.current=sticky.current?count*stepDistance:0;
    host.style.setProperty('--story-travel',`${travel.current}px`);
-   host.style.minHeight=`${panel.offsetHeight+travel.current}px`;
+   host.style.minHeight=`${Math.ceil(panel.getBoundingClientRect().height)+travel.current}px`;
    host.dataset.pinned=String(sticky.current);
    setPinned(sticky.current);
    if(sticky.current&&!wasSticky)setManual(null);
@@ -25,7 +28,7 @@ export function useMobileStory(count:number,stepDistance=280){
   const schedule=()=>{if(!frame)frame=requestAnimationFrame(update)};
   // Browser bars do not rebuild the sequence. Width/orientation changes do.
   let width=innerWidth;
-  const resize=()=>{if(innerWidth!==width){width=innerWidth;measure();schedule()}};
+  const resize=()=>{if(innerWidth!==width){width=innerWidth;available=window.visualViewport?.height??innerHeight;measure();schedule()}};
   const observer=new ResizeObserver(()=>{measure();schedule()});observer.observe(panel);
   measure();schedule();window.addEventListener('scroll',schedule,{passive:true});window.addEventListener('resize',resize);
   const visibility=new IntersectionObserver(entries=>{for(const entry of entries)host.dataset.visible=String(entry.isIntersecting)},{threshold:0});visibility.observe(host);

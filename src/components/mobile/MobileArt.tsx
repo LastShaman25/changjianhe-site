@@ -1,17 +1,21 @@
 "use client";
+import {useId} from 'react';
 import type {Locale} from '@/data/projects';
 import type {StoryKind} from './stories';
 const clamp=(x:number)=>Math.max(0,Math.min(1,x));
 export default function MobileArt({kind,progress,step,locale}:{kind:StoryKind;progress:number;step:number;locale:Locale}){
+ const mapClip=useId();
+ const settle=clamp((progress-2/3)/.22);
+ const grouping=settle*settle*(3-2*settle);
  const t=(en:string,zh:string)=>locale==='zh'?zh:en;
  const phase=clamp(progress*3-1),arrival=clamp(phase/.45),response=clamp((phase-.6)/.35);
  return <svg className="mobile-art" viewBox="0 0 320 180" role="img" aria-label={t(`${kind} visual, stage ${step+1}`,`${kind} 可视化，第 ${step+1} 步`)}>
- {kind==='rental'&&<><rect width="320" height="180" rx="8" fill="#dce2d5"/><path d="M190-20L150 70 180 120 125 200" fill="none" stroke="#adc6c2" strokeWidth="37"/>{[25,65,105,145].map(y=><path key={y} d={`M0 ${y}L320 ${y+25}M${y} 0L${y-50} 180`} stroke="#f6f3ec" strokeWidth="3"/>)}<path d="M82 128L230 68" stroke="#bd4137" strokeWidth="2" strokeDasharray="4 5" pathLength="1" strokeDashoffset={1-clamp(progress*3)}/><circle cx="82" cy="128" r={8+Math.sin(progress*Math.PI)*3} fill="#ff6559" stroke="#fff" strokeWidth="3"/><circle cx="230" cy="68" r="4" fill="#171717"/><text x="20" y="157" fill="#253e37" fontSize="12">{t('JERSEY CITY','泽西市')}</text><text x="203" y="45" fill="#253e37" fontSize="11">{t('MANHATTAN','曼哈顿')}</text></>}
+ {kind==='rental'&&<><defs><clipPath id={mapClip}><rect width="320" height="180" rx="8"/></clipPath></defs><g clipPath={`url(#${mapClip})`}><rect width="320" height="180" rx="8" fill="#dce2d5"/><path d="M190-20L150 70 180 120 125 200" fill="none" stroke="#adc6c2" strokeWidth="37"/>{[25,65,105,145].map(y=><path key={y} d={`M0 ${y}L320 ${y+25}M${y} 0L${y-50} 180`} stroke="#f6f3ec" strokeWidth="3"/>)}<path d="M82 128L230 68" stroke="#bd4137" strokeWidth="2" strokeDasharray="1" pathLength="1" strokeDashoffset={1-clamp(progress*3)}/><circle cx="82" cy="128" r={8+Math.sin(progress*Math.PI)*3} fill="#ff6559" stroke="#fff" strokeWidth="3"/><circle cx="230" cy="68" r="4" fill="#171717"/><text x="20" y="157" fill="#253e37" fontSize="12">{t('JERSEY CITY','泽西市')}</text><text x="203" y="45" fill="#253e37" fontSize="11">{t('MANHATTAN','曼哈顿')}</text></g></>}
  {kind==='elements'&&<>
  <path d="M90 38V142" stroke="#67695b" strokeDasharray="3 5"/><g opacity={step===2?.45:1}><rect x="57" y="8" width="66" height="30" rx="3" fill="#303129" stroke="#8e9180"/><path d="M66 17h15m6 0h25M66 27h46" stroke="#b6b7aa"/></g><text x="147" y="29" fill="#f6f3ec" fontSize="13">{t('Records','结构化记录')}</text>
  <rect x="46" y="62" width="88" height="46" fill="#24261f" stroke="#ff6559"/><path d="M57 97h66" stroke="#ff6559" strokeWidth="2" opacity={step===1?1:.3}/><text x="90" y="89" textAnchor="middle" fill="#f6f3ec" fontSize="11">{t('PRIVATE','私有变换')}</text><text x="147" y="81" fill="#f6f3ec" fontSize="13">{t('Opaque boundary','不透明边界')}</text><text x="147" y="98" fill="#aaa99f" fontSize="10">{t('Method omitted','不展示内部方法')}</text>
  <circle cx="90" cy={39+arrival*22} r="4" fill="#ff6559" opacity={step===1&&phase<.38?1:0}/>
- <g opacity={step===2?1:step===1?response:.18}>{Array.from({length:18},(_,i)=>{const a=i*2.4,r=8+Math.sqrt(i)*5;return <circle key={i} cx={90+Math.cos(a)*r+(step===2?(i%2?8:-8):0)} cy={145+Math.sin(a)*r*.6} r="2.8" fill="#ff6559"/>})}</g><text x="147" y="148" fill="#f6f3ec" fontSize="13">{t('Elements','计算元素')}</text>
+ <g opacity={step===2?1:step===1?response:.18}>{Array.from({length:18},(_,i)=>{const a=i*2.4,r=8+Math.sqrt(i)*5;return <circle key={i} cx={90+Math.cos(a)*r+grouping*(i%2?8:-8)} cy={145+Math.sin(a)*r*.6} r="2.8" fill="#ff6559"/>})}</g><text x="147" y="148" fill="#f6f3ec" fontSize="13">{t('Elements','计算元素')}</text>
  </>}
  {kind==='studio'&&<><rect x="8" y="6" width="304" height="168" rx="6" fill="#24261f" stroke="#626553"/><path d="M8 36h304" stroke="#626553"/><text x="22" y="25" fill="#b2b4a4" fontSize="10">INNERFY / STUDIO</text><text x="294" y="25" textAnchor="end" fill="#ff6559" fontSize="11">0{step+1} / 05</text>{[0,1,2].map((i)=><g key={i} transform={`translate(0 ${i*36})`} opacity={clamp(progress*5-step+.35+i*.1)}><rect x="22" y="52" width="24" height="24" rx="4" fill={step===3?'#ff6559':'#44483a'}/><path d={step>=3?'M28 64l4 4 8-10':'M28 60h12m-12 7h8'} fill="none" stroke={step===3?'#171717':'#d1d4bd'} strokeWidth="1.8"/><rect x="62" y="54" width={160-i*20} height="6" fill="#a5aa90"/><rect x="62" y="66" width={110+i*25} height="4" fill="#555947"/></g>)}</>}
  {kind==='research'&&<>
