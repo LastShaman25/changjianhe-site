@@ -11,7 +11,7 @@ export default function PageMotion({children}:{children:ReactNode}){
   if(!enabled)return;
   const scope=root.current!;
   gsap.from(scope.querySelectorAll('[data-reveal]'),{y:55,opacity:0,duration:1.1,stagger:.14,ease:'power3.out'});
-  gsap.to(scope.querySelector('.editorial-intro h1'),{x:-35,ease:'none',scrollTrigger:{trigger:scope.querySelector('.editorial-intro'),start:'top 56px',end:'bottom 56px',scrub:1}});
+  gsap.to(scope.querySelector('.editorial-intro h1'),{x:()=>window.innerWidth<=760?0:-35,ease:'none',scrollTrigger:{trigger:scope.querySelector('.editorial-intro'),start:'top 56px',end:'bottom 56px',scrub:1}});
   scope.querySelectorAll('[data-rise]').forEach(el=>gsap.from(el,{y:55,opacity:.15,duration:1,ease:'power2.out',scrollTrigger:{trigger:el,start:'top 94%',toggleActions:'play none none reverse'}}));
   scope.querySelectorAll('.visual-lab,.studio-demo,.rental-demo,.learning-demo').forEach(el=>gsap.fromTo(el,{y:55,scale:.96},{y:0,scale:1,ease:'none',scrollTrigger:{trigger:el,start:'top 95%',end:'top 40%',scrub:.8}}));
   scope.querySelectorAll('.work-symbol').forEach(el=>gsap.fromTo(el,{y:22,rotation:-12},{y:-22,rotation:12,ease:'none',scrollTrigger:{trigger:el.parentElement,start:'top bottom',end:'bottom top',scrub:1}}));

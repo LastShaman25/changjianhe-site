@@ -76,7 +76,7 @@ export function mountHomeMotion(root, contextSafe, copy) {
     root.querySelectorAll('[data-cap]').forEach(b => listen(b, 'click', () => { cap = b.dataset.cap; root.querySelectorAll('[data-cap]').forEach(n => n.setAttribute('aria-pressed', String(n === b))); byId('cap-description').textContent = copy(caps[cap]); paintParticles(1); }));
     const steps = [['LOCAL WORKSPACE', 'Begin with structure.', 'Inspect a structured dataset before choosing how to proceed.', ['Input type|Structured table', 'Field review|Required', 'Source handling|Local']], ['DATASET REVIEW', 'Understand the source.', 'Review field roles and sensitivity before moving forward.', ['Schema|Review fields', 'Sensitivity|Human review', 'Characterization|Inspect report']], ['VALIDATION', 'Evidence before approval.', 'Examine measured results in their declared evaluation context.', ['Structural preservation|Separate measure', 'Reconstruction resistance|Threat-model bounded', 'Linkage resistance|Separate measure']], ['HUMAN DECISION', 'Make the decision explicit.', 'Review the evidence and declared capabilities before approval.', ['Validation evidence|Review required', 'Capability scope|Review required', 'Approval|Human action']], ['GOVERNED ARTIFACTS', 'A substrate for computation.', 'Inspect approved outputs and manage the project lifecycle.', ['Elements|Computational output', 'Contract|Declared interface', 'Private artifact|Contents excluded']]];
     let studioStep = 0;
-    function setStudio(i) { studioStep = i; const s = steps[i]; byId('studio-kicker').textContent = copy(s[0]); byId('studio-heading').textContent = copy(s[1]); byId('studio-description').textContent = copy(s[2]); const rows = byId('studio-rows'); rows.replaceChildren(); s[3].forEach(pair => { const row = document.createElement('div'); row.className = 'studio-row'; pair.split('|').forEach(t => { const span = document.createElement('span'); span.textContent = copy(t); row.appendChild(span); }); rows.appendChild(row); }); root.querySelectorAll('[data-step]').forEach(b => b.setAttribute('aria-pressed', String(Number(b.dataset.step) === i))); byId('studio-next').textContent = copy(i === 4 ? 'Back to intake ↗' : 'Next scene →'); }
+    function setStudio(i) { studioStep = i; const s = steps[i]; byId('studio-kicker').textContent = copy(s[0]); byId('studio-heading').textContent = copy(s[1]); byId('studio-description').textContent = copy(s[2]); const rows = byId('studio-rows'); rows.replaceChildren(); s[3].forEach(pair => { const row = document.createElement('div'); row.className = 'studio-row'; pair.split('|').forEach(t => { const span = document.createElement('span'); span.textContent = copy(t); row.appendChild(span); }); rows.appendChild(row); }); root.querySelectorAll('[data-step]').forEach(b => b.setAttribute('aria-pressed', String(Number(b.dataset.step) === i))); byId('studio-next').textContent = copy(i === 4 ? 'Back to intake ↗︎' : 'Next scene →︎'); }
     root.querySelectorAll('[data-step]').forEach(b => listen(b, 'click', () => { studioManual = true; setStudio(Number(b.dataset.step)); }));
     listen(byId('studio-next'), 'click', () => { studioManual = true; setStudio((studioStep + 1) % 5); });
     listen(byId('shortlist'), 'click', e => { const b = e.currentTarget, selected = b.getAttribute('aria-pressed') === 'true'; b.setAttribute('aria-pressed', String(!selected)); b.textContent = copy(selected ? '＋ Save to sample shortlist' : '✓ Saved · Click to remove'); });
@@ -149,7 +149,13 @@ export function mountHomeMotion(root, contextSafe, copy) {
         layoutMedia = gsap.matchMedia();
         layoutMedia.add({ wide: '(min-width: 851px)', compact: '(max-width: 850px)' }, ctx => {
             const wide = ctx.conditions.wide;
-            const track = (id, extra = {}) => ({ trigger: id, start: wide ? 'top 56px' : 'top 75%', end: wide ? 'bottom bottom' : 'bottom 35%', scrub: 1.1, invalidateOnRefresh: true, ...extra });
+            const track = (id, extra = {}) => {
+                const focus = !wide && (id === '#studio' || id === '#research');
+                return { trigger: focus ? root.querySelector(id === '#studio' ? '.studio-frame' : '.research-visual') : id,
+                    start: focus ? (id === '#research' ? 'center center' : 'top 90px') : wide ? 'top 56px' : 'top 80%',
+                    end: focus ? () => '+=' + Math.round(innerHeight * (id === '#studio' ? 1.6 : 1.25)) : wide ? 'bottom bottom' : 'bottom 45%',
+                    pin: focus && innerHeight > 550, pinSpacing: true, scrub: wide ? 1.1 : .5, invalidateOnRefresh: true, ...extra };
+            };
             // CSS supplies wide-screen sticky stages. Compact layouts retain normal scrolling.
             gsap.timeline({ scrollTrigger: track('#intro', { start: 'top 56px', end: wide ? 'bottom bottom' : 'bottom 20%' }) })
                 .to('.hero-name', { x: wide ? -180 : -48, ease: 'none', duration: 1 }, 0)
@@ -172,13 +178,15 @@ export function mountHomeMotion(root, contextSafe, copy) {
                 .fromTo('#transform-scan', { y: 0, opacity: 0 }, { y: 115, opacity: .9, duration: .45, ease: 'none' }, .25)
                 .to('#transform-scan', { opacity: 0, duration: .15 }, .7)
                 .fromTo('.mobile-elements .mobile-node', { y: 28, opacity: .2 }, { y: 0, opacity: 1, stagger: .13, duration: .3 }, .1)
+                .fromTo('.mobile-elements .mobile-arrow', { y: -8, opacity: 0 }, { y: 0, opacity: 1, stagger: .18, duration: .25 }, .2)
+                .fromTo('.mobile-elements .mobile-field span', { scale: .2, opacity: .1 }, { scale: 1, opacity: 1, stagger: .05, duration: .35 }, .55)
                 .to({ hold: 0 }, { hold: 1, duration: .5 });
             const studioState = { p: 0 };
             gsap.timeline({ scrollTrigger: track('#studio') })
                 .fromTo('.studio-window', { y: 65, scale: .87, rotationX: wide ? 12 : 0 }, { y: 0, scale: 1, rotationX: 0, duration: .3 })
                 .to(studioState, { p: 1, duration: 1, ease: 'none', onUpdate: () => {
                     const next = Math.min(4, Math.floor(clamp((studioState.p - .12) / .76) * 5));
-                    if (wide && !studioManual && next !== studioStep)
+                    if (!studioManual && next !== studioStep)
                         setStudio(next);
                 } }, 0);
             const researchState = { p: 0 };
@@ -186,7 +194,7 @@ export function mountHomeMotion(root, contextSafe, copy) {
                 .fromTo('#user-tower', { x: -70, opacity: .1 }, { x: 0, opacity: 1, duration: .35, ease: 'sine.inOut' })
                 .fromTo('#item-tower', { x: 70, opacity: .1 }, { x: 0, opacity: 1, duration: .35, ease: 'sine.inOut' }, 0)
                 .to(researchState, { p: 1, duration: 1.2, ease: 'none', onUpdate: () => {
-                    if (!wide || researchManual)
+                    if (researchManual)
                         return;
                     const next = researchState.p > .9 ? 2 : researchState.p > .12 ? 1 : 0;
                     if (next !== research)

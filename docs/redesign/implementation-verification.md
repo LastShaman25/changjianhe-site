@@ -70,3 +70,10 @@ Replaced the invented slope activity with a source-based privacy/profile/tutor f
 
 ## Always-on motion — 2026-09-07
 Removed the shared motion toggle and obsolete hidden homepage review controls. Homepage and project animations now always initialize, ignoring old URL/session/OS preferences. Production build and targeted ESLint passed; browser confirmed motion-ready/motion-active with ?motion=off, zero toggle elements, and no console errors. Local preview: port 3004.
+
+## Mobile platform optimization — 2026-09-07
+- Mobile Studio/research now progress with scroll. The visual panels pin independently of surrounding copy; Studio animation uses a child of the pinned frame. Short landscape viewports do not pin.
+- Phone Elementization uses a readable vertical layout with animated passage arrows and output dots. Project Elementization animates the mobile output field.
+- Adjusted hero composition, narrow headlines, touch targets, safe-area spacing, wrapped Studio navigation, rental filters, and vertical assistant data flow. Mobile headlines no longer slide sideways out of alignment.
+- Static CTA arrows use inline SVG. Embedded/dynamic arrow strings explicitly request Unicode text presentation, preventing emoji substitution.
+- Build/TypeScript and targeted ESLint passed (.next-mobile-verified). Browser checks: 390x844 homepage pin position and scroll progression; 320x740 EN project pages and Chinese assistant without horizontal overflow; phone Elementization vertical view; 1280x800 Studio layout intact; no captured console errors. Physical iOS/Android hardware not tested.

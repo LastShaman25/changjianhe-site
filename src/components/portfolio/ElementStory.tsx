@@ -16,6 +16,7 @@ export default function ElementStory({locale}:{locale:Locale}){
   gsap.from('.element-explanation',{y:14,opacity:.2,duration:.6});
   if(step===0)gsap.from('.record-row',{x:-20,opacity:0,stagger:.15,duration:.6});
   if(step===1){
+   gsap.from('.mini-elements i',{scale:0,opacity:0,duration:.5,stagger:.06,delay:1.2});
    const tl=gsap.timeline();
    tl.fromTo('.transfer-packet',{attr:{cx:265},opacity:0},{attr:{cx:353},opacity:1,duration:.8,stagger:.12,ease:'sine.inOut'})
     .to('.transfer-packet',{opacity:0,duration:.2})

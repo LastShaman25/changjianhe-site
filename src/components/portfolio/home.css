@@ -67,3 +67,52 @@
 .portfolio-home #contact .contact-row{margin-top:40px}
 @media(max-width:850px){.portfolio-home #contact .stage{min-height:560px;padding-top:65px;padding-bottom:65px}.portfolio-home #contact .contact-row{margin-top:32px}}
 .portfolio-home #contact .chapterhead{margin-bottom:32px}
+/* Phone composition: stable viewport sizing, centered artwork and readable controls. */
+@media(max-width:850px){
+ .portfolio-home .stage{padding:24px 6vw 44px;overflow:clip;min-height:0}
+ .portfolio-home #studio .stage,.portfolio-home #research .stage{overflow:visible}
+ .portfolio-home .chapterhead{padding-right:0;min-height:26px}
+ .portfolio-home .chapterhead .identity{display:none}
+ .portfolio-home .chapterhead .proposed{margin-left:auto}
+ .portfolio-home .rail{left:50%;right:auto;bottom:max(10px,env(safe-area-inset-bottom));gap:3px;padding:5px 8px}
+ .portfolio-home .rail a{width:34px;height:34px}
+ .portfolio-home .hero{min-height:640px;height:calc(100svh - 56px);max-height:900px}
+ .portfolio-home .hero-name{margin-top:28px;font-size:16vw;line-height:.86;width:100%}
+ .portfolio-home .hero-name .last{padding-left:0;text-align:right}
+ .portfolio-home .portrait{width:100%;max-width:540px;left:50%;margin-left:-50%;bottom:15%;object-fit:contain}
+ .portfolio-home .hero-stamp{top:36%;font-size:8px;max-width:120px}
+ .portfolio-home .hero-intro{font-size:18px;max-width:145px}
+ .portfolio-home .hero-actions{max-width:170px}
+ .portfolio-home .hero .scene-bottom{padding-bottom:30px;align-items:flex-end;gap:12px}
+ .portfolio-home .scroll-cue{top:44%;right:6vw;max-width:100px;font-size:8px}
+ .portfolio-home .split,.portfolio-home .research-layout{padding:24px 0;gap:24px;min-width:0}
+ .portfolio-home .copy h2,.portfolio-home .research-layout h2,.portfolio-home .element-head h2{font-size:clamp(34px,10.6vw,54px);line-height:1;overflow-wrap:normal}
+ .portfolio-home .scene-bottom{flex-wrap:wrap;align-items:flex-start;gap:20px;padding-right:0}
+ .portfolio-home .scene-bottom .motion-note{font-size:12px;max-width:none}
+ .portfolio-home .element-head{margin-top:24px}
+ .portfolio-home .element-head p{font-size:13px;max-width:32ch}
+ .portfolio-home .element-viz{display:block!important;width:100%;height:auto;min-height:190px;margin:32px auto;flex:none}
+ .portfolio-home .mobile-elements{display:none!important}
+ .portfolio-home .capabilities,.portfolio-home .cap-description{max-width:100%}
+ .portfolio-home .capabilities button,.portfolio-home .research-tabs button{min-height:44px}
+ .portfolio-home .studio-window{width:100%;min-width:0;background:#22231e}
+ .portfolio-home .window-body{grid-template-columns:1fr}
+ .portfolio-home .studio-nav{display:flex;flex-direction:row;overflow-x:auto;gap:6px;padding:10px;border-right:0;border-bottom:1px solid #555}
+ .portfolio-home .studio-nav button{flex:0 0 auto;min-height:44px;font-size:11px;padding:9px}
+ .portfolio-home .studio-main{padding:18px;min-height:290px}
+ .portfolio-home .studio-main h3{font-size:24px}
+ .portfolio-home .studio-row{font-size:11px;gap:12px;line-height:1.5}
+ .portfolio-home .studio-row span{min-width:0;overflow-wrap:anywhere}
+ .portfolio-home .studio-note{font-size:10px;line-height:1.5}
+ .portfolio-home .research-visual{width:100%;background:#171717;padding:12px 0;min-height:320px}
+ .portfolio-home .tower-viz,.portfolio-home .result-panel{width:100%;height:290px;min-height:290px}
+ .portfolio-home .result-panel{padding:16px;gap:18px}
+ .portfolio-home .research-visual small{display:block;line-height:1.5}
+ .portfolio-home #contact h2{font-size:clamp(48px,13vw,90px);line-height:.98}
+ .portfolio-home #contact .stage{min-height:440px;padding-bottom:65px}
+}
+@media(max-width:850px) and (max-height:550px){.portfolio-home .hero{height:650px}.portfolio-home .studio-main{min-height:220px}.portfolio-home .research-visual{min-height:260px}.portfolio-home .tower-viz,.portfolio-home .result-panel{height:230px;min-height:230px}}
+.portfolio-home .studio-frame{min-width:0;width:100%}
+@media(max-width:850px){.portfolio-home .studio-frame{background:#f6f3ec}.portfolio-home .studio-nav{overflow-x:visible;flex-wrap:wrap}.portfolio-home .studio-nav button{flex:1 0 27%;text-align:center}.portfolio-home .hero .scene-bottom{position:relative;z-index:4}.portfolio-home .portrait{bottom:19%}}
+
+@media(max-width:520px){.portfolio-home .element-viz{display:none!important}.portfolio-home .mobile-elements{display:flex!important;margin:24px 0;gap:10px}.portfolio-home .mobile-elements .mobile-node{width:100%;max-width:320px;position:relative;overflow:hidden;padding:16px}.portfolio-home .mobile-elements .private-node::after{content:'';position:absolute;left:12px;right:12px;bottom:10px;height:1px;background:#ff6559;opacity:.7}.portfolio-home .mobile-elements .mobile-arrow{height:20px;line-height:1}.portfolio-home .mobile-elements .mobile-field span{width:7px;height:7px}}
