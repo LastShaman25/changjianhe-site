@@ -1,7 +1,7 @@
 @theme {
-  --font-sans: var(--font-space-grotesk), "Segoe UI Variable", "Segoe UI", "Helvetica Neue",
+  --font-sans: Arial, "Segoe UI Variable", "Segoe UI", "Helvetica Neue",
     Arial, sans-serif;
-  --font-mono: var(--font-space-grotesk), "Segoe UI Variable", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: Arial, "Segoe UI Variable", "Helvetica Neue", Arial, sans-serif;
 
   --color-bg: #131313;
   --color-bg-elevated: #181817;

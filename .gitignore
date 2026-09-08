@@ -39,3 +39,12 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+/.next-*/
+
+# Commit the documented, empty environment template only
+!.env.example
+
+# Local preview and scratch files
+/tmp/
+/.local/

@@ -42,6 +42,7 @@ export default function ContactForm() {
     setErrorCode(null);
 
     startTransition(async () => {
+      try {
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: {
@@ -62,6 +63,10 @@ export default function ContactForm() {
 
       setStatus("success");
       resetForm();
+      } catch {
+        setStatus("error");
+        setErrorCode("send_failed");
+      }
     });
   }
 

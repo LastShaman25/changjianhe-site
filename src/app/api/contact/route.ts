@@ -13,6 +13,11 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: false, error: "invalid_request" }, { status: 400 });
   }
 
+  if (!payload || typeof payload !== 'object' ||
+      ['name','email','organization','subject','message','website'].some(key =>
+        key in payload && typeof payload[key as keyof ContactPayload] !== 'string')) {
+    return NextResponse.json({ok:false,error:'invalid_request'},{status:400});
+  }
   if (payload.website?.trim()) {
     return NextResponse.json({ ok: true });
   }
@@ -26,10 +31,6 @@ export async function POST(req: Request) {
   const config = getContactConfig();
 
   if (!config.apiKey || !config.toEmail || !config.fromEmail) {
-    if (process.env.NODE_ENV !== "production") {
-      return NextResponse.json({ ok: true, devMode: true });
-    }
-
     return NextResponse.json(
       { ok: false, error: "service_unavailable" },
       { status: 503 }
@@ -47,7 +48,9 @@ export async function POST(req: Request) {
     payload.message.trim()
   ].join("\n");
 
-  const response = await fetch("https://api.resend.com/emails", {
+  let response: Response;
+  try {
+  response = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: {
       Authorization: `Bearer ${config.apiKey}`,
@@ -61,6 +64,10 @@ export async function POST(req: Request) {
       text
     })
   });
+
+  } catch {
+    return NextResponse.json({ok:false,error:"send_failed"},{status:502});
+  }
 
   if (!response.ok) {
     return NextResponse.json({ ok: false, error: "send_failed" }, { status: 502 });
