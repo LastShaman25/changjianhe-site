@@ -77,3 +77,7 @@ Removed the shared motion toggle and obsolete hidden homepage review controls. H
 - Adjusted hero composition, narrow headlines, touch targets, safe-area spacing, wrapped Studio navigation, rental filters, and vertical assistant data flow. Mobile headlines no longer slide sideways out of alignment.
 - Static CTA arrows use inline SVG. Embedded/dynamic arrow strings explicitly request Unicode text presentation, preventing emoji substitution.
 - Build/TypeScript and targeted ESLint passed (.next-mobile-verified). Browser checks: 390x844 homepage pin position and scroll progression; 320x740 EN project pages and Chinese assistant without horizontal overflow; phone Elementization vertical view; 1280x800 Studio layout intact; no captured console errors. Physical iOS/Android hardware not tested.
+
+
+## Dedicated mobile implementation — 2026-09-07
+Replaced the mobile homepage and project explainers with independently loaded components, native scroll/sticky sequences, compact layouts, menu chapter navigation, and SVG arrows. Detailed evidence and remaining physical-device gate: [mobile verification](mobile-verification.md). Build/TypeScript/targeted lint and 40 localized response checks passed. Recorded all five mobile sequences, reverse motion, visible research input arrival, and unclipped rental save. Public deployment remains separate.

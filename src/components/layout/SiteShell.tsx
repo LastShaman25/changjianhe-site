@@ -1,3 +1,5 @@
+import {headers} from "next/headers";
+import {DeviceProvider} from "@/components/portfolio/DeviceProvider";
 import { ReactNode } from "react";
 import SiteHeader from "@/components/layout/SiteHeader";
 import SiteFooter from "@/components/layout/SiteFooter";
@@ -6,12 +8,14 @@ type SiteShellProps = {
   children: ReactNode;
 };
 
-export default function SiteShell({ children }: SiteShellProps) {
+export default async function SiteShell({ children }: SiteShellProps) {
+  const requestHeaders=await headers();
+  const initialMobile=/Mobile|Android|iPhone|iPad/i.test(requestHeaders.get("user-agent") || "");
   return (
-    <div className="page-shell">
+    <DeviceProvider initialMobile={initialMobile}><div className="page-shell">
       <SiteHeader />
       {children}
       <SiteFooter />
-    </div>
+    </div></DeviceProvider>
   );
 }

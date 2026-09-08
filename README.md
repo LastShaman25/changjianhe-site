@@ -6,6 +6,7 @@ Bilingual English/Chinese portfolio built with Next.js 16, React 19, TypeScript,
 
 - `src/app/` — routes, layouts, metadata, and contact API
 - `src/components/portfolio/` — homepage, project narratives, interactive explainers, and motion
+- `src/components/mobile/` — dedicated phone/tablet homepage, project visuals, and native scroll sequences
 - `src/components/layout/` — shared navigation and footer
 - `src/styles/` — site styling
 - `src/pic/` and `public/` — website images and public assets
@@ -59,3 +60,7 @@ npm run build
 ```
 
 `npm run typecheck` is also available after Next.js has generated route types. The production build includes TypeScript checking. Preview deployments should be checked in both `/en` and `/zh`, with automatic motion and a mobile viewport.
+
+## Mobile presentation
+
+Mobile and desktop share URLs and content, but load separate presentation components. The server uses a device hint for the initial render; viewport and pointer capabilities confirm the choice in the browser. Mobile uses native document scrolling and sticky cards, with arrow-controlled animated stages when the available height is too short for safe pinning. No floating chapter bar is rendered. See `docs/redesign/mobile-verification.md` for the verification scope and remaining physical-device checks.
